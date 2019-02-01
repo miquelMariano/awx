@@ -1,0 +1,16 @@
+---
+
+- name: Test telegram module
+  hosts: localhost
+  connection: local
+  vars:
+    telegram_msg: "Message sent from Ansible playbok | {{ ansible_memtotal_mb }}"
+  tasks:
+    - name: Send test message
+      telegram:
+        token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
+        chat_id: 6343788
+        msg: "{{ telegram_msg }}"
+
+    - command: cat /etc/hostname
+      register: my_var
