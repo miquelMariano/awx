@@ -42,8 +42,8 @@
     register: task_output
 
   - set_stats: 
-        data:
-          telegram_msg: "{{ task_output.instance }}""
+    data:
+        telegram_msg: "{{ task_output.instance }}""
 
 #  - name: Debug
 #    debug: 
