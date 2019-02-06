@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: all:!localhost
   gather_facts: false
   serial: 1
   tasks:
@@ -39,6 +39,8 @@
         dns_suffix: "{{ dc_domain}}" 
         password: "{{ localadminpass }}" 
     delegate_to: localhost
+
+- hosts: localhost
   - name: Send telegram message
     telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
