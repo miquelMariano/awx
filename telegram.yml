@@ -1,12 +1,9 @@
 ---
 
-- name: Test telegram module
-  hosts: localhost
+- hosts: localhost
   connection: local
-#  vars:
-#    telegram_msg: "Message sent from Ansible playbok | {{ inventory_hostname }}"
   tasks:
-    - name: Send test message
+    - name: Send telegram message
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
         chat_id: 6343788
