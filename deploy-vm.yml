@@ -38,3 +38,8 @@
         dns_suffix: "{{ dc_domain}}" 
         password: "{{ localadminpass }}" 
     delegate_to: localhost
+  - name: Send telegram message
+      telegram:
+        token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
+        chat_id: 6343788
+        msg: "VM {{ inventory_hostname }} with IP {{ vm_ip }} has deployed correctly with Ansible on cluster {{ vc_cluster }}"
