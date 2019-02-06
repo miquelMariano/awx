@@ -41,5 +41,6 @@
     delegate_to: localhost
     register: task_output
 
-  - debug: 
+  - name: Debug
+    debug: 
         msg: "{{task_output.stdout}}"
