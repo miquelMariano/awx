@@ -41,6 +41,7 @@
     delegate_to: localhost
 
 - hosts: localhost
+  tasks:
   - name: Send telegram message
     telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
