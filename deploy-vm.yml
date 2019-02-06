@@ -41,6 +41,10 @@
     delegate_to: localhost
     register: task_output
 
-  - name: Debug
-    debug: 
-        msg: "{{ task_output.instance }}"
+  - set_stats: 
+        data:
+          telegram_msg: "{{ task_output.instance }}""
+
+#  - name: Debug
+#    debug: 
+#        msg: "{{ task_output.instance }}"
