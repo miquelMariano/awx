@@ -41,9 +41,10 @@
     delegate_to: localhost
     register: task_output
 
-  - set_stats: 
-    data:
-        telegram_msg: "{{ task_output.instance }}""
+  - name: "Pass variables into Tower workflow"
+    set_stats:
+      data:
+        telegram_msg:  "{{ task_output.instance }}"
 
 #  - name: Debug
 #    debug: 
