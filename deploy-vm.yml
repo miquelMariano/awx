@@ -39,3 +39,7 @@
         dns_suffix: "{{ dc_domain}}" 
         password: "{{ localadminpass }}" 
     delegate_to: localhost
+    register: task_output
+
+  - debug: 
+        msg: "{{task_output.stdout}}"
