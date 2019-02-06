@@ -4,7 +4,7 @@
   hosts: localhost
   connection: local
   vars:
-    telegram_msg: "Message sent from Ansible playbok | {{ ansible_memtotal_mb }}"
+    telegram_msg: "Message sent from Ansible playbok | {{ inventory_hostname }}"
   tasks:
     - name: Send test message
       telegram:
