@@ -43,4 +43,4 @@
 
   - name: Debug
     debug: 
-        msg: "{{task_output.stdout}}"
+        msg: "{{ task_output.stdout }}"
