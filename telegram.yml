@@ -10,7 +10,5 @@
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
         chat_id: 6343788
-        msg: "{{ telegram_msg }}"
+        msg: "{{ task_output.stdout }}"
 
-    - command: cat /etc/hostname
-      register: my_var
