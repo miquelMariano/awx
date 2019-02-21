@@ -45,7 +45,3 @@
     set_stats:
       data:
         telegram_msg: "VM {{ inventory_hostname }} with IP {{ vm_ip }} has been deployed correctly with Ansible on cluster {{ task_output.instance.hw_esxi_host }} "
-
-#  - name: Debug
-#    debug: 
-#        msg: "{{ task_output.instance }}"
