@@ -9,4 +9,4 @@
       command: hostname
       register: hostname
     - debug:
-         var: hostname
+         var: hostname.stdout
