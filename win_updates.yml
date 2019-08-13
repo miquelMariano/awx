@@ -51,4 +51,4 @@
           - UpdateRollups
         reboot: yes
       when:
-          - install_updates == true
+          - install_updates == 'true'
