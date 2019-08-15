@@ -64,15 +64,15 @@
 #localadminpass=Secret123!
 
 
-- hosts: all:!localhost
+- hosts: all
   gather_facts: false
   serial: 1
   tasks:
   - name: Deploy VM windows from template and customize
     vmware_guest:
-      hostname: "{{ vc_hostname }}" 
-      username: "{{ vc_username }}" 
-      password: "{{ vc_password }}" 
+      hostname: "{{ vc_hostname }}" #Defined on vars/mail.yml
+      username: "{{ vc_username }}" #Defined on vars/mail.yml
+      password: "{{ vc_password }}" #Defined on vars/mail.yml
       validate_certs: no
       datacenter: "{{ vc_datacenter }}"
       folder: "{{ vc_folder }}"
@@ -88,7 +88,7 @@
          memory_mb: "{{ vm_memory }}"
          num_cpus: "{{ vm_cpu }}"
          scsi: paravirtual
-      template: "{{ vm_template }}" 
+      template: "{{ vm_template }}" #Defined on vars/mail.yml
       networks:
       - name: "{{ vm_networkportgroup }}"
         ip: "{{ vm_ip }}"
@@ -100,8 +100,8 @@
         dns_servers:
         - "{{ vm_networkdns1 }}"
         - "{{ vm_networkdns2 }}"
-        dns_suffix: "{{ dc_domain}}" 
-        password: "{{ localadminpass }}" 
+        dns_suffix: "{{ dc_domain}}" #Defined on vars/mail.yml
+        password: "{{ localadminpass }}" #Defined on vars/mail.yml
     delegate_to: localhost
     register: task_output
 
