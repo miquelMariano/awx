@@ -81,7 +81,7 @@
       annotation: "{{ vc_note }}"
       state: poweredon
       disk:
-      - size_gb: "{{ vm_disksize}}"
+#      - size_gb: "{{ vm_disksize}}"
         type: thin
         datastore: "{{ vm_datastore }}"
       hardware:
