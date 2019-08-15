@@ -83,7 +83,7 @@
       state: poweredoff
       delegate_to: localhost
    
-- name: Resize disk
+  - name: Resize disk
     vmware_guest:
       hostname: "{{ vc_hostname }}" #Defined on vars/mail.yml
       username: "{{ vc_username }}" #Defined on vars/mail.yml
@@ -97,7 +97,7 @@
         datastore: "{{ vm_datastore }}"
       delegate_to: localhost  
       
-- name: Customization
+  - name: Customization
     vmware_guest:
       hostname: "{{ vc_hostname }}" #Defined on vars/mail.yml
       username: "{{ vc_username }}" #Defined on vars/mail.yml
@@ -124,7 +124,7 @@
         password: "{{ localadminpass }}" #Defined on vars/mail.yml
     delegate_to: localhost
 
-- name: Power on VM
+  - name: Power on VM
     vmware_guest:
       hostname: "{{ vc_hostname }}" #Defined on vars/mail.yml
       username: "{{ vc_username }}" #Defined on vars/mail.yml
