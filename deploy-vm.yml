@@ -96,6 +96,21 @@
         type: thin
         datastore: "{{ vm_datastore }}"
     delegate_to: localhost  
+
+  - name: Set network settings
+    vmware_guest:
+      hostname: "{{ vc_hostname }}" #Defined on vars/mail.yml
+      username: "{{ vc_username }}" #Defined on vars/mail.yml
+      password: "{{ vc_password }}" #Defined on vars/mail.yml
+      validate_certs: no
+      state: present
+      name: "{{ inventory_hostname }}" 
+      networks:
+      - name: "{{ vm_networkportgroup }}"
+        ip: "{{ vm_ip }}"
+        netmask: "{{ vm_networkmask }}"
+        gateway: "{{ vm_networkgw }}" 
+    delegate_to: localhost       
       
   - name: Customization
     vmware_guest:
@@ -109,11 +124,6 @@
          memory_mb: "{{ vm_memory }}"
          num_cpus: "{{ vm_cpu }}"
          scsi: paravirtual
-      networks:
-      - name: "{{ vm_networkportgroup }}"
-        ip: "{{ vm_ip }}"
-        netmask: "{{ vm_networkmask }}"
-        gateway: "{{ vm_networkgw }}"
       customization:
         hostname: "{{ inventory_hostname }}"
         autologon: true
