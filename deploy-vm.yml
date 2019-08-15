@@ -81,7 +81,7 @@
       name: "{{ inventory_hostname }}"
       annotation: "{{ vc_note }}"
       state: poweredoff
-      delegate_to: localhost
+    delegate_to: localhost
    
   - name: Resize disk
     vmware_guest:
@@ -95,7 +95,7 @@
       - size_gb: "{{ vm_disksize}}"
         type: thin
         datastore: "{{ vm_datastore }}"
-      delegate_to: localhost  
+    delegate_to: localhost  
       
   - name: Customization
     vmware_guest:
@@ -133,7 +133,7 @@
       state: poweredon
       name: "{{ inventory_hostname }}"
       wait_for_ip_address: yes
-      delegate_to: localhost       
+    delegate_to: localhost       
     register: task_output
 
   - name: Register variables to use into Tower workflow
