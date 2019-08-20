@@ -63,6 +63,8 @@
 #vm_template=miquel-template-W2012R2-Std-ES
 #dc_domain=vmwareporvexperts.local
 #localadminpass=Secret123!
+#domain_admin: miquel.mariano
+#domain_admin_pass: Secret123!
 
 
 - hosts: all
@@ -101,8 +103,11 @@
         dns_servers:
         - "{{ vm_networkdns1 }}"
         - "{{ vm_networkdns2 }}"
-        dns_suffix: "{{ dc_domain}}" 
+        dns_suffix: "{{ dc_domain }}" 
         password: "{{ localadminpass }}" 
+        joindomain: "{{ dc_domain }}"
+        domainadmin: "{{ domain_admin }}"
+        domainadminpassword: "{{ domain_admin_pass }}"
     delegate_to: localhost
 
   - name: Resize disk
