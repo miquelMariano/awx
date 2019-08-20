@@ -62,6 +62,11 @@
           - SecurityUpdates
           - CriticalUpdates
           - UpdateRollups
+          - Updates
+          - Windows Server 2016
+          - Drivers
+          - Definition Updates
+          - Windows Defender
         reboot: yes
       when:
           - install_updates == 'true'
