@@ -28,6 +28,9 @@
           - UpdateRollups
           - Updates
           - Windows Server 2016
+          - Drivers
+          - Definition Updates
+          - Windows Defender
         state: searched
       register: list_of_found_updates
 
