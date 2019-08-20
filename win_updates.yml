@@ -1,9 +1,23 @@
 ---
-##EXAMPLE:  ansible-playbook playbooks/win_update.yml -i inventory/servers -e "servers=dc install_updates=false"
+#DESCRIPTION
+#   Check or install windows updates and notify by telegram chat
 
-##############################################################################
-## Play 1   Search-only, return list of found updates (if any).
-##############################################################################
+#NOTES 
+#   File Name  : win_updates.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+
+#USAGE
+#   ansible-playbook playbooks/deploy-vms.yml -i inventory/vms-to-deploy
+#   
+#CHANGELOG
+#   v1 19/05/2019  Playbook creation
+#   v2 20/08/2019  Adapt to Tower/AWX
+#  
+##EXAMPLE  
+#ansible-playbook playbooks/win_update.yml -i inventory/servers -e "servers=dc install_updates=false"
+
+
 - hosts: "{{ servers }}"
   tasks:
     - name: Search-only, return list of found updates (if any).
@@ -21,9 +35,6 @@
 #    - debug:
 #        var: groups[ "{{ servers }}" ]
 
-##############################################################################
-### Play 2   Send info with telegram
-##############################################################################
 - hosts: localhost
   connection: local
   tasks:
@@ -31,16 +42,12 @@
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
         chat_id: 6343788
-        msg: Host "{{ hostvars[item].inventory_hostname }}" >> "{{ hostvars[item].list_of_found_updates.found_update_count }}" found updates.
-# "{{ hostvars[item].list_of_found_updates.results[0].found_update_count }}" "{{ hostvars[item].list_of_found_updates.results[0].item }}" "{{ hostvars[item].list_of_found_updates.results[1].found_update_count }}" "{{ hostvars[item].list_of_found_updates.results[1].item }}" "{{ hostvars[item].list_of_found_updates.results[2].found_update_count }}" "{{ hostvars[item].list_of_found_updates.results[2].item }}"
+        msg: Host {{ hostvars[item].inventory_hostname }} >> {{ hostvars[item].list_of_found_updates.found_update_count }} found updates.
       with_items:
         -  "{{ groups[servers] }}"
       ignore_errors: yes
 
 
-##############################################################################
-#### Play 3    Install all security, critical, and rollup updates when install_updates is true
-###############################################################################
 - hosts: "{{ servers }}"
   tasks:
     - name: Install all security, critical, and rollup updates
