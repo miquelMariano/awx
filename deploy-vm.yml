@@ -128,7 +128,7 @@
       name: "{{ inventory_hostname }}"
       wait_for_ip_address: yes
     delegate_to: localhost      
-
+    register: task_output
 
   - name: Register variables to use into Tower workflow
     set_stats:
