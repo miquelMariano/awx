@@ -26,6 +26,8 @@
           - SecurityUpdates
           - CriticalUpdates
           - UpdateRollups
+          - Updates
+          - Windows Server 2016
         state: searched
       register: list_of_found_updates
 
@@ -42,8 +44,8 @@
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
         chat_id: 6343788
-#        msg: Host {{ hostvars[item].inventory_hostname }} >> {{ hostvars[item].list_of_found_updates.found_update_count }} found updates.
-        msg: Host {{ hostvars[item].inventory_hostname }} >> {{ hostvars[item].list_of_found_updates }}
+        msg: Host {{ hostvars[item].inventory_hostname }} >> {{ hostvars[item].list_of_found_updates.found_update_count }} found updates.
+#        msg: Host {{ hostvars[item].inventory_hostname }} >> {{ hostvars[item].list_of_found_updates }}
       with_items:
         -  "{{ groups[servers] }}"
       ignore_errors: yes
