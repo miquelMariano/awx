@@ -26,8 +26,6 @@
           - SecurityUpdates
           - CriticalUpdates
           - UpdateRollups
-          - updates
-          - WindowsServer2016
         state: searched
       register: list_of_found_updates
 
