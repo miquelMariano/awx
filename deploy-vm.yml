@@ -122,7 +122,7 @@
     vmware_guest:
       hostname: "{{ vc_hostname }}"
       username: "{{ vc_username }}"
-      password: "{{ avc_password }}"
+      password: "{{ vc_password }}"
       validate_certs: no
       state: poweredon
       name: "{{ inventory_hostname }}"
