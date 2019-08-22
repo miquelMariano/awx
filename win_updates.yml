@@ -19,7 +19,7 @@
 - hosts: "{{ servers }}"
   serial: 1
   tasks:
-    - name: Search-only, return list of found updates (if any).
+    - name: Search windows updates
       win_updates:
         category_names:
           - SecurityUpdates
@@ -36,15 +36,15 @@
     - debug:
         var: list_of_found_updates
 
-    - name: Send telegram notification
+    - name: Send telegram updates
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
         chat_id: 6343788
-        msg: Host {{ inventory_hostname }} >> {{ list_of_found_updates.found_update_count }} found updates.
+        msg: Host {{ inventory_hostname }} >> {{ list_of_found_updates.found_update_count }} found updates before install.
       ignore_errors: yes
       delegate_to: localhost
 
-    - name: Install all security, critical, and rollup updates
+    - name: Install all windows updates
       win_updates:
         category_names:
           - SecurityUpdates
@@ -58,6 +58,28 @@
         reboot: yes
       when:
           - install_updates|bool == true
+
+    - name: Search windows updates after install
+      win_updates:
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+          - UpdateRollups
+          - Updates
+          - Windows Server 2016
+          - Drivers
+          - Definition Updates
+          - Windows Defender
+        state: searched
+      register: list_of_found_updates       
+
+    - name: Send telegram updates after install
+      telegram:
+        token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
+        chat_id: 6343788
+        msg: Host {{ inventory_hostname }} >> {{ list_of_found_updates.found_update_count }} found updates after install.
+      ignore_errors: yes
+      delegate_to: localhost
 
 #    - debug:
 #        var: groups[ "{{ servers }}" ]
