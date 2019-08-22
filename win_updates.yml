@@ -81,37 +81,3 @@
         msg: Host {{ inventory_hostname }} >> {{ list_of_found_updates.found_update_count }} found updates after install.
       ignore_errors: yes
       delegate_to: localhost
-
-#    - debug:
-#        var: groups[ "{{ servers }}" ]
-
-#- hosts: localhost
-#  connection: local
-#  tasks:
-#    - name: Send telegram notification
-#      telegram:
-#        token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-#        chat_id: 6343788
-#        msg: Host {{ hostvars[item].inventory_hostname }} >> {{ hostvars[item].list_of_found_updates.found_update_count }} found updates.
-#        msg: Host {{ hostvars[item].inventory_hostname }} >> {{ hostvars[item].list_of_found_updates }}
-#      with_items:
-#        -  "{{ groups[servers] }}"
-#      ignore_errors: yes
-
-
-# - hosts: "{{ servers }}"
-#   tasks:
-#     - name: Install all security, critical, and rollup updates
-#       win_updates:
-#         category_names:
-#           - SecurityUpdates
-#          - CriticalUpdates
-#          - UpdateRollups
-#          - Updates
-#          - Windows Server 2016
-#          - Drivers
-#          - Definition Updates
-#          - Windows Defender
-#        reboot: yes
-#      when:
-#          - install_updates|bool == true
