@@ -42,6 +42,7 @@
         chat_id: 6343788
         msg: Host {{ inventory_hostname }} >> {{ list_of_found_updates.found_update_count }} found updates.
       ignore_errors: yes
+      delegate_to: localhost
 
     - name: Install all security, critical, and rollup updates
       win_updates:
