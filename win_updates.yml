@@ -58,7 +58,7 @@
           - Windows Defender
         reboot: yes
       when:
-          - install_updates|bool == true and list_of_found_updates.found_update_count|int >= 0
+          - install_updates|bool == true and list_of_found_updates.found_update_count|int != 0
 
     - name: Search windows updates after install
       win_updates:
@@ -74,7 +74,7 @@
         state: searched
       register: list_of_found_updates  
       when:
-          - install_updates|bool == true and list_of_found_updates.found_update_count|int >= 0    
+          - install_updates|bool == true and list_of_found_updates.found_update_count|int != 0    
 
     - name: Send telegram updates after install
       telegram:
@@ -84,4 +84,4 @@
       ignore_errors: yes
       delegate_to: localhost
       when:
-          - install_updates|bool == true and list_of_found_updates.found_update_count|int >= 0
+          - install_updates|bool == true and list_of_found_updates.found_update_count|int != 0
