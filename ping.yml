@@ -7,14 +7,6 @@
     - assert:
             that:
               - ansible_play_hosts == ansible_play_hosts_all
-
-    - name: Send telegram notification
-      telegram:
-         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-         chat_id: 6343788
-         msg: Check hosts > {{ inventory_hostname }} 
-      ignore_errors: yes
-      delegate_to: localhost
     
     - name: Ping
       ping:
@@ -37,6 +29,6 @@
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
          chat_id: 6343788
-         msg: Ping NOK > {{ (ansible_play_hosts_all | difference(ansible_play_hosts)) | first }}
+         msg: Ping NOK > {{ (ansible_play_hosts_all | difference(ansible_play_hosts)) }}
       delegate_to: localhost
  
