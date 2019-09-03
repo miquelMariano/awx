@@ -19,7 +19,7 @@
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
          chat_id: 6343788
-         msg: Ping OK list > {{ ansible_play_hosts }} 
+         msg: Ping SUCCESS > {{ ansible_play_hosts }} 
       ignore_errors: yes
       delegate_to: localhost
       run_once: true
@@ -30,7 +30,7 @@
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
          chat_id: 6343788
-         msg: Ping NOK list > {{ (ansible_play_hosts_all | difference(ansible_play_hosts)) }}
+         msg: Ping FAILED > {{ (ansible_play_hosts_all | difference(ansible_play_hosts)) }}
       delegate_to: localhost
       run_once: true
  
