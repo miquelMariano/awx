@@ -17,7 +17,7 @@
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
          chat_id: 6343788
-         msg: Ping OK > {{ hostname.stdout }} 
+         msg: Ping OK > {{ inventory_hostname }} 
       ignore_errors: yes
       delegate_to: localhost
       when:
