@@ -2,5 +2,21 @@
 
 - hosts: all
   tasks:
+    
     - name: Ping
-      win_ping:
+      ping:
+    
+    - name: Hostname
+      command: hostname
+      register: hostname
+    
+    - debug:
+         var: hostname.stdout
+
+    - name: Send telegram updates
+          telegram:
+            token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
+            chat_id: 6343788
+            msg: Host {{ hostname.stdout }} 
+          ignore_errors: yes
+          delegate_to: localhost
