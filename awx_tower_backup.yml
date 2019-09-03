@@ -20,7 +20,6 @@
 
 - hosts: all
   gather_facts: no
-  ignore_errors: yes
   serial: 1
   vars:
     backup_folder: /etc/ansible/awx-backup
@@ -37,4 +36,8 @@
       register: timestamp  
 
     - name: Backup AWX/Tower using tower-cli
-      shell: "tower-cli receive --tower-host http://192.168.6.152 --all >  {{ backup_folder }}/{{ timestamp.stdout }}.json"
+      shell: "tower-cli receive --tower-host http://{{ item }} --all >  {{ backup_folder }}/{{ timestamp.stdout }}_{{ item }}.json"
+      with_items:
+         - 192.168.0.19
+         - 192.168.0.151
+         - 192.168.0.152
