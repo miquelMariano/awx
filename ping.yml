@@ -3,6 +3,7 @@
 - hosts: all
   gather_facts: no
   serial: 1 
+  log_plays:
   tasks:
     
     - name: Ping
