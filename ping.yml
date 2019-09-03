@@ -1,6 +1,8 @@
 ---
 
 - hosts: all
+  gather_facts: no
+  ignore_errors: yes
   serial: 1 
   tasks:
     
