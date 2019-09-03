@@ -13,7 +13,7 @@
       register: ping
   
     - debug:
-         var: ping
+         var: ansible_play_hosts_all
   
     - name: Send telegram notification
       telegram:
@@ -22,6 +22,7 @@
          msg: Ping OK list > {{ ansible_play_hosts }} 
       ignore_errors: yes
       delegate_to: localhost
+      run_once: true
       when:
           - ping.ping == "pong"
 
