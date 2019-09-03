@@ -3,7 +3,7 @@
 - hosts: all
   user: root
   vars:
-        text: "Test message from ansible"
+        telegram_msg: "Test message from ansible role"
   roles:
     - role: telegram
 
