@@ -16,7 +16,7 @@
       ignore_errors: yes
 
     - debug:
-         var: ping  
+         var: ping.ping  
     
     - debug:
          var: hostname.stdout
@@ -29,4 +29,4 @@
       ignore_errors: yes
       delegate_to: localhost
       when:
-          - ping.ping == pong 
+          - ping.ping == "pong" 
