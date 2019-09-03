@@ -7,7 +7,6 @@
     - name: Ping
       ping:
       register: ping
-      ignore_errors: yes
     
     - name: Hostname
       command: hostname
@@ -29,13 +28,3 @@
       delegate_to: localhost
       when:
           - ping.ping == "pong" 
-
-    - name: Send telegram notification
-      telegram:
-         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-         chat_id: 6343788
-         msg: Ping NOK > {{ hostname.stdout }} 
-      ignore_errors: yes
-      delegate_to: localhost
-      when:
-          - ping.ping is not defined
