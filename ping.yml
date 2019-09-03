@@ -3,6 +3,14 @@
 - hosts: all
   gather_facts: no
   tasks:
+
+    - name: Send telegram notification
+      telegram:
+         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
+         chat_id: 6343788
+         msg: Pinging hosts > {{ inventory_hostname }} 
+      ignore_errors: yes
+      delegate_to: localhost
     
     - name: Ping
       ping:
