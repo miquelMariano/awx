@@ -33,7 +33,7 @@
         mode: 0755  
       
     - name: Register timestamp variable
-      local_action: command date +%Y%m%d-%H:%M
+      local_action: command date +%Y%m%d-%H_%M
       register: timestamp  
 
     - name: Backup AWX/Tower using tower-cli
