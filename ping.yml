@@ -7,17 +7,11 @@
     - name: Ping
       ping:
       register: ping
-    
-    - name: Hostname
-      command: hostname
-      register: hostname
-      ignore_errors: yes
+  
 
     - debug:
          var: ping
-    
-    - debug:
-         var: hostname.stdout
+  
 
     - name: Send telegram notification
       telegram:
