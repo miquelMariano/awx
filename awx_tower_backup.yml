@@ -19,7 +19,7 @@
 
 
 - name: Backup AWX/Tower using tower-cli
-  hosts: "192.168.0.19"
+  hosts: all
   gather_facts: no
   ignore_errors: yes
   serial: 1
