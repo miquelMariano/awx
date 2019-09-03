@@ -32,4 +32,5 @@
          chat_id: 6343788
          msg: Ping NOK > {{ (ansible_play_hosts_all | difference(ansible_play_hosts)) }}
       delegate_to: localhost
+      run_once: true
  
