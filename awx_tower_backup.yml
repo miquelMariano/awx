@@ -44,7 +44,9 @@
          - 192.168.6.19
          - 192.168.6.151
          - 192.168.6.152
+         - 10.0.0.1
       register: output
+      ignore_errors: yes
       
     - debug:
        var: output
