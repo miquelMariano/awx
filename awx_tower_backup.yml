@@ -37,4 +37,4 @@
       register: timestamp  
 
     - name: Backup AWX/Tower using tower-cli
-      command: tower-cli receive --tower-host http://192.168.6.152 --all >  {{ timestamp.stdout }}.json
+      command: tower-cli receive --tower-host http://192.168.6.152 --all >  {{ backup_folder }}/{{ timestamp.stdout }}.json
