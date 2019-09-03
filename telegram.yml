@@ -14,7 +14,7 @@
 #CHANGELOG
 #   v1 20/04/2017  	Playbook creation
 #   v2 16/08/2019  	Add notes 
-#   v3 04/09/2019	Add var default message to telegram_msg
+#   v3 04/09/2019	  Add var default message to telegram_msg
 #  
 
 - hosts: all
