@@ -14,7 +14,7 @@
       ignore_errors: yes
 
     - debug:
-         var: ping.ping  
+         var: ping
     
     - debug:
          var: hostname.stdout
