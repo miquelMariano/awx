@@ -1,0 +1,35 @@
+---
+#DESCRIPTION
+#   Backup AWX/Tower using tower-cli
+
+#NOTES 
+#   File Name  : awx_tower_backup.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 4
+
+#USAGE
+#   ansible-playbook playbooks/awx_tower_backup -i inventory/servers
+#   
+#CHANGELOG
+#   v1 03/09/2019   Playbook creation
+#   v2 
+#   
+
+
+
+
+- name: Backup AWX/Tower using tower-cli
+  hosts: 192.168.0.19
+  gather_facts: no
+  ignore_errors: yes
+  serial: 1
+  vars:
+    backup_folder: /etc/ansible/awx-backup
+
+  tasks:
+    - name: Create root directory if don't exist
+      file:
+        path: "{{ backup_folder }}"
+        state: directory
+        mode: 0755  
+      
