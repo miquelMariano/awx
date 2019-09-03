@@ -8,14 +8,11 @@
             that:
               - ansible_play_hosts == ansible_play_hosts_all
     
-    - name: Ping
+    - name: Pinging hosts
       ping:
       register: ping
   
-    - debug:
-         var: ansible_play_hosts_all
-  
-    - name: Send telegram notification
+    - name: Send telegram notification SUCCESS hosts
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
          chat_id: 6343788
@@ -26,7 +23,7 @@
       when:
           - ping.ping == "pong"
 
-    - name: Send telegram notification
+    - name: Send telegram notification FAILED hosts
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
          chat_id: 6343788
