@@ -44,4 +44,8 @@
          - 192.168.6.19
          - 192.168.6.151
          - 192.168.6.152
+      register: output
+      
+    - debug:
+       var: output     
 
