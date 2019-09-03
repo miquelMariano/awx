@@ -32,3 +32,10 @@
         state: directory
         mode: 0755  
       
+    - name: Register timestamp variable
+      local_action: command date +%Y%m%d-%H:%M
+      register: timestamp  
+
+    - name: Backup AWX/Tower using tower-cli
+      nxos_command:  
+         - tower-cli receive --tower-host http://192.168.6.152 --all >  {{ timestamp.stdout }}.json
