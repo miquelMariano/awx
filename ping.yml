@@ -11,6 +11,7 @@
     - name: Pinging hosts
       ping:
       register: ping
+      ignore_errors: yes
   
     - name: Send telegram notification SUCCESS hosts
       telegram:
