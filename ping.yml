@@ -2,14 +2,13 @@
 
 - hosts: all
   gather_facts: no
-  ignore_errors: yes
   serial: 1 
   tasks:
     
     - name: Ping
       ping:
-      ignore_errors: yes
       register: ping
+      ignore_errors: yes
     
     - name: Hostname
       command: hostname
