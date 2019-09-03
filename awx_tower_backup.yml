@@ -9,7 +9,10 @@
 
 #USAGE
 #   ansible-playbook playbooks/awx_tower_backup -i inventory/servers
-#   
+#
+#   use "tower-cli send --tower-host http://192.168.6.152 file.json" to restore
+#
+
 #CHANGELOG
 #   v1 03/09/2019   Playbook creation
 #   v2 
@@ -47,5 +50,14 @@
       register: output
       
     - debug:
-       var: output     
+       var: output
+
+    - name: Send telegram notification
+      telegram:
+         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
+         chat_id: 6343788
+         msg: {{ timestamp.stdout }} AWX Backup > {{ output.msg }}
+      ignore_errors: yes
+      delegate_to: localhost
+         
 
