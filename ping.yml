@@ -6,7 +6,7 @@
 
     - assert:
             that:
-              - devices == inventory_hostname
+              - ansible_play_hosts == ansible_play_hosts_all
 
     - name: Send telegram notification
       telegram:
@@ -37,7 +37,6 @@
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
          chat_id: 6343788
-         msg: Ping NOK > {{ (inventory_hostname | difference(devices)) | first }}
-      ignore_errors: yes
+         msg: Ping NOK > {{ (ansible_play_hosts_all | difference(ansible_play_hosts)) | first }}
       delegate_to: localhost
  
