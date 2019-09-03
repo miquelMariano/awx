@@ -41,14 +41,14 @@
     - name: Backup AWX/Tower using tower-cli
       shell: "tower-cli receive --tower-host http://{{ item }} --all >  {{ backup_folder }}/{{ timestamp.stdout }}_{{ item }}.json"
       with_items:
-         - 192.168.6.19
-         - 192.168.6.151
+#         - 192.168.6.19
+#         - 192.168.6.151
          - 192.168.6.152
       register: output
       ignore_errors: yes
       
     - debug:
-       var: output
+       var: output.rc
 
     - name: Send telegram notification
       telegram:
