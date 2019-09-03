@@ -35,9 +35,14 @@
       local_action: command date +%Y%m%d-%H_%M
       register: timestamp  
 
+    - debug:
+          var: timestamp.stdout
+
     - name: Backup AWX/Tower using tower-cli
       shell: "tower-cli receive --tower-host http://{{ item }} --all >  {{ backup_folder }}/{{ timestamp.stdout }}_{{ item }}.json"
       with_items:
          - 192.168.0.19
          - 192.168.0.151
          - 192.168.0.152
+
+         
