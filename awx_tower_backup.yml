@@ -18,8 +18,7 @@
 
 
 
-- name: Backup AWX/Tower using tower-cli
-  hosts: all
+- hosts: all
   gather_facts: no
   ignore_errors: yes
   serial: 1
