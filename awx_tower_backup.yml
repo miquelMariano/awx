@@ -32,7 +32,7 @@
         mode: 0755  
       
     - name: Register timestamp variable
-      local_action: command date +%Y%m%d-%H_%M
+      command: date +%Y%m%d-%H_%M
       register: timestamp  
 
     - debug:
@@ -45,4 +45,3 @@
          - 192.168.0.151
          - 192.168.0.152
 
-         
