@@ -12,16 +12,22 @@
 #   
 #   
 #CHANGELOG
-#   v1 20/04/2017  Playbook creation
-#   v2 16/08/2019  Add notes 
+#   v1 20/04/2017  	Playbook creation
+#   v2 16/08/2019  	Add notes 
+#   v3 04/09/2019	Add var default message to telegram_msg
 #  
 
-- hosts: localhost
+- hosts: all
+  gather_facts: no
   connection: local
+  vars:
+    telegram_msg: "Default telegram message"
   tasks:
     - name: Send telegram message
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
         chat_id: 6343788
         msg: "{{ telegram_msg }}"
+      delegate_to: localhost
+      ignore_errors: yes  
 
