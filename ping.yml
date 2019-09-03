@@ -30,4 +30,6 @@
          msg: Ping FAILED > {{ (ansible_play_hosts_all | difference(ansible_play_hosts)) }}
       delegate_to: localhost
       run_once: true
+      when:
+          - ansible_play_hosts is not defined
  
