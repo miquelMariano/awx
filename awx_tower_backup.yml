@@ -50,12 +50,16 @@
     - debug:
        var: output
 
-    - name: Send telegram notification
+    - name: Send telegram notification when backup failed
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
          chat_id: 6343788
-         msg: AWX/tower backup result > Failed={{ output }}
+         msg: AWX/tower backup FAILED
       ignore_errors: yes
       delegate_to: localhost
+      when:
+          - output.failed|bool == true
+
+
          
 
