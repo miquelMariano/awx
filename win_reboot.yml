@@ -36,7 +36,6 @@
 
     - name: Reboot server > '{{ inventory_hostname }}'
       win_reboot:
-         shutdown_timeout: 3600
          reboot_timeout: 3600
       when:
           - confirm_reboot|bool == true
