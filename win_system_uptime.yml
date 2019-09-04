@@ -1,0 +1,32 @@
+---
+#DESCRIPTION
+#   Check windows uptime and send telegram notification
+
+#NOTES 
+#   File Name  : win_system_uptime.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+
+#USAGE
+#   ansible-playbook playbooks/win_system_uptime.yml -i inventory/servers -e "servers=horizon"
+#   
+#CHANGELOG
+#   v1 19/05/2019  Playbook creation
+#   
+#  
+
+- hosts: "{{ servers }}"
+  serial: 1
+  tasks:
+
+    - name: Check system uptime > '{{ inventory_hostname }}'
+      win_shell: 'Get-CimInstance -ClassName win32_operatingsystem | select lastbootuptime | ft -HideTableHeaders'
+      register: uptime
+
+    - name: Send telegram uptime
+      telegram:
+        token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
+        chat_id: 6343788
+        msg: '{{ inventory_hostname }} boot uptime: {{ uptime.stdout_lines[1] }}'
+      ignore_errors: yes
+      delegate_to: localhost
