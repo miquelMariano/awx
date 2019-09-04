@@ -1,4 +1,22 @@
 ---
+#DESCRIPTION
+#   Ping and send telegram notification
+
+#NOTES 
+#   File Name  : ping.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+
+#USAGE
+#   
+#
+#   
+#
+
+#CHANGELOG
+#   v1 03/09/2019   Playbook creation
+#    
+
 
 - hosts: all
   gather_facts: no
