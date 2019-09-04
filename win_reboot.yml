@@ -19,14 +19,6 @@
   serial: 1
   tasks:
 
-    - name: Start play. Send telegram notification
-      telegram:
-        token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-        chat_id: 6343788
-        msg:  Start task at {{ ansible_date_time.date }}  {{ ansible_date_time.time }}
-      ignore_errors: yes
-      delegate_to: localhost
-
     - name: Check system uptime > '{{ inventory_hostname }}' before reboot
       win_shell: 'Get-CimInstance -ClassName win32_operatingsystem | select lastbootuptime | ft -HideTableHeaders'
       register: uptime
