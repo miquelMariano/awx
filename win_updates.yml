@@ -15,6 +15,7 @@
 #   v2 20/08/2019   Adapt to Tower/AWX
 #   v3 22/08/2019   Change usage method  
 #   v4 22/08/2019   Add before and after telegram notifications
+#   v5 10/09/2019   Remove notification after updates installed
 
 
 - hosts: "{{ servers }}"
@@ -41,7 +42,7 @@
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
         chat_id: 6343788
-        msg: Host {{ inventory_hostname }} >> {{ list_of_found_updates.found_update_count }} found updates before install.
+        msg: Host {{ inventory_hostname }} >> {{ list_of_found_updates.found_update_count }} found updates.
       ignore_errors: yes
       delegate_to: localhost
 
@@ -57,31 +58,5 @@
           - Definition Updates
           - Windows Defender
         reboot: yes
-      when:
-          - install_updates|bool == true and list_of_found_updates.found_update_count|int != 0
-
-    - name: Search windows updates after install
-      win_updates:
-        category_names:
-          - SecurityUpdates
-          - CriticalUpdates
-          - UpdateRollups
-          - Updates
-          - Windows Server 2016
-          - Drivers
-          - Definition Updates
-          - Windows Defender
-        state: searched
-      register: list_of_found_updates  
-      when:
-          - install_updates|bool == true and list_of_found_updates.found_update_count|int != 0    
-
-    - name: Send telegram updates after install
-      telegram:
-        token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-        chat_id: 6343788
-        msg: Host {{ inventory_hostname }} >> {{ list_of_found_updates.found_update_count }} found updates after install.
-      ignore_errors: yes
-      delegate_to: localhost
       when:
           - install_updates|bool == true and list_of_found_updates.found_update_count|int != 0
