@@ -5,3 +5,4 @@
   tasks:
     - name: Windows ping
       win_ping:
+      register: output
