@@ -5,4 +5,9 @@
   tasks:
     - name: Windows ping
       win_ping:
-      register: output
+      register: task_output
+
+- name: Register variables to use into Tower workflow
+    set_stats:
+      data:
+        output: "{{ task_output }}" 
