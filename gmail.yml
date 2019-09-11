@@ -1,0 +1,34 @@
+---
+
+#DESCRIPTION
+#   This playbook sent mail using Gmail SMTP
+
+#NOTES 
+#   File Name  : gmail.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+
+#USAGE
+#   ansible-playbook playbooks/gmail.yml -i inventory/servers -e "pass=my_gmail_pass"
+#   It is required to create an application password:
+#   https://myaccount.google.com/apppasswords
+#   
+#CHANGELOG
+#   v1 11/09/2019  	Playbook creation
+#   
+
+- hosts: ansible
+  tasks:
+     - name: Sending email
+       mail:
+         host: smtp.gmail.com
+         port: 465
+         secure: always
+         username: miquel.mariano0@gmail.com
+         password: "{{ pass }}"
+         from: Ansible <miquel.mariano0@gmail.com>
+         to: miquel.mariano@ncora.com
+#        cc: CC_EMAIL@gmail.com
+         subject: Hello world from Ansible
+         body: This mail has been sent from Ansible playbook
+
