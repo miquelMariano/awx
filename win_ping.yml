@@ -7,7 +7,7 @@
       win_ping:
       register: task_output
 
-    - name: Register variables to use into Tower workflow
+    - name: Register variables to use into Tower workflow with send mail task
       set_stats:
         data:
-          output: "{{ task_output }}" 
+          body_msg: "{{ task_output }}" 

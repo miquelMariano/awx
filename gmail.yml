@@ -20,7 +20,7 @@
 - hosts: ansible
   gather_facts: no
   vars:
-    - output: This mail has been sent from Ansible playbook
+    - body_msg: This mail has been sent from Ansible playbook
   tasks:
      - name: Sending email
        mail:
@@ -33,6 +33,6 @@
          to: miquel.mariano@ncora.com
 #        cc: CC_EMAIL@gmail.com
          subject: Hello world from Ansible
-         body: "{{ output }}"
+         body: "{{ body_msg }}"
        delegate_to: localhost   
 
