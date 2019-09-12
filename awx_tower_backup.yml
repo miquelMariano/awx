@@ -57,7 +57,7 @@
     - name: Send telegram notification when backup failed
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-         chat_id: 6343788
+         chat_id: '6343788'
          msg: AWX/tower backup FAILED
       ignore_errors: yes
       delegate_to: localhost
@@ -67,7 +67,7 @@
     - name: Send telegram notification when backup is OK
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-         chat_id: 6343788
+         chat_id: '6343788'
          msg: AWX/tower backup OK
       ignore_errors: yes
       delegate_to: localhost
@@ -91,7 +91,6 @@
       with_items:
             - 192.168.6.19
             - 192.168.6.151
-            - 192.168.6.152
-      delegate_to: localhost     
+            - 192.168.6.152     
       when:
           - output.failed is not defined    
