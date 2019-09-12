@@ -74,7 +74,7 @@
       when:
           - output.failed is not defined
 
-    - name: Send backup to mail
+    - name: Send backup to mail when backup is OK
        mail:
          host: smtp.gmail.com
          port: 465
@@ -88,4 +88,6 @@
          body: "See attachments"
          attach:
            - "{{ backup_folder }}/{{ timestamp.stdout }}_{{ item }}.json"
-       delegate_to: localhost         
+       delegate_to: localhost     
+       when:
+          - output.failed is not defined    
