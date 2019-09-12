@@ -88,6 +88,10 @@
          body: "See attachments"
          attach:
            - "{{ backup_folder }}/{{ timestamp.stdout }}_{{ item }}.json"
+         with_items:
+            - 192.168.6.19
+            - 192.168.6.151
+            - 192.168.6.152
        delegate_to: localhost     
        when:
           - output.failed is not defined    
