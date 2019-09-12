@@ -87,10 +87,8 @@
          subject: "AWX/Tower backup {{ timestamp.stdout }}"
          body: "See attachments"
          attach:
-           - "{{ backup_folder }}/{{ timestamp.stdout }}_{{ item }}.json"
-      with_items:
-            - 192.168.6.19
-            - 192.168.6.151
-            - 192.168.6.152     
+           - "{{ backup_folder }}/{{ timestamp.stdout }}_192.168.6.19.json"
+           - "{{ backup_folder }}/{{ timestamp.stdout }}_192.168.6.151.json"
+           - "{{ backup_folder }}/{{ timestamp.stdout }}_192.168.6.152.json"   
       when:
           - output.failed is not defined    
