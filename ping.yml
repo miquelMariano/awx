@@ -34,8 +34,8 @@
     - name: Send telegram notification SUCCESS hosts
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-         chat_id: 6343788
-         msg: Ping SUCCESS > {{ ansible_play_hosts }} 
+         chat_id: '6343788'
+         msg: Ping SUCCESS > {{ ansible_play_hosts }}|str
       ignore_errors: yes
       delegate_to: localhost
       run_once: true
@@ -45,7 +45,7 @@
     - name: Send telegram notification FAILED hosts
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-         chat_id: 6343788
+         chat_id: '6343788'
          msg: Ping FAILED > {{ (ansible_play_hosts_all | difference(ansible_play_hosts)) }}
       delegate_to: localhost
       run_once: true
