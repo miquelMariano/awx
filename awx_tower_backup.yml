@@ -15,11 +15,17 @@
 #
 #REQUIREMENTS
 #   var "pass" 
+#   var "awx_nodes" in follow format:
+#   awx_nodes:
+#     - 192.168.6.163
+#     - 192.168.6.151
+#     - 192.168.6.152
+#     - 192.168.6.19
 #
 #CHANGELOG
 #   v1 03/09/2019   Playbook creation
 #   v2 12/09/2019   Add task to send backup to mail 
-#    
+#   v3 17/09/2019   Add "awx_nodes" var 
 #   
 
 - hosts: all
