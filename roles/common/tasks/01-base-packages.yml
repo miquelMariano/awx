@@ -1,0 +1,59 @@
+---
+
+- name: Ensure epel-release repo are installed
+  yum:
+    name: epel-release
+    state: latest
+
+
+- name: Ensure common software are installed
+  yum:
+    name: "{{ item }}"
+    state: present #latest
+  with_items:
+      - vim
+      - git
+      - htop
+      - iotop
+      - net-tools
+      - mlocate
+      - libselinux-python
+      - ansible
+      - ntp
+      - python-pip
+      - wget
+      - npm #Required for install gtop
+      - system-storage-manager
+      - ntp
+  when: ansible_os_family == 'RedHat'
+
+- name: Install "gtop" node.js package.
+  npm:
+    name: gtop 
+    global: yes
+
+#- name: Intall last version of EPEL repo
+#  yum:
+#    name: epel-release
+#    state: latest
+
+#- name: Install last version of VIM
+#  yum:
+#    name: vim
+#    state: latest
+
+#- name: Install last version of HTOP
+#  yum:
+#    name: htop
+#    state: latest
+
+#- name: Install last version of libselinux-python
+#  yum:
+#    name: libselinux-python
+#    state: latest
+
+#- name: Ensure Ansible packages are installed
+#  yum: 
+#    name: ansible
+#    state: present
+
