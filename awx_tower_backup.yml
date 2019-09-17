@@ -45,10 +45,7 @@
     - name: Backup AWX/Tower using tower-cli
       shell: "tower-cli receive --tower-host http://{{ item }} --all >  {{ backup_folder }}/{{ timestamp.stdout }}_{{ item }}.json"
       with_items:
-         - 192.168.6.19
-         - 192.168.6.151
-         - 192.168.6.152
-         - 192.168.6.163
+         - "{{ awx_nodes }}"
       register: output
       ignore_errors: yes
       
@@ -88,8 +85,8 @@
          subject: "AWX/Tower backup {{ timestamp.stdout }}"
          body: "See attachments"
          attach:
-           - "{{ backup_folder }}/{{ timestamp.stdout }}_192.168.6.19.json"
-           - "{{ backup_folder }}/{{ timestamp.stdout }}_192.168.6.151.json"
-           - "{{ backup_folder }}/{{ timestamp.stdout }}_192.168.6.152.json"   
+           - "{{ backup_folder }}/{{ timestamp.stdout }}_{{ item }}.json"
+      with_items:
+         - "{{ awx_nodes }}"     
       when:
           - output.failed is not defined    
