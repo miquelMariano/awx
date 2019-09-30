@@ -36,6 +36,12 @@
         state: searched
       register: list_of_found_updates
 
+    - name: Reboot server > ""{{ inventory_hostname }}""
+      win_reboot:
+         reboot_timeout: 3600
+      when:
+          - list_of_found_updates.reboot_required|bool == true  
+
     - debug:
         var: list_of_found_updates
 
