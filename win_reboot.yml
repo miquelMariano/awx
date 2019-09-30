@@ -29,7 +29,7 @@
     - name: Send telegram uptime info before reboot
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-        chat_id: 6343788
+        chat_id: '6343788'
         msg: '{{ inventory_hostname }} boot uptime before reboot: {{ uptime.stdout_lines[1] }}'
       ignore_errors: yes
       delegate_to: localhost
@@ -47,7 +47,7 @@
     - name: Send telegram uptime info after reboot
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-        chat_id: 6343788
+        chat_id: '6343788'
         msg: '{{ inventory_hostname }} boot uptime after reboot: {{ uptime.stdout_lines[1] }}'
       ignore_errors: yes
       delegate_to: localhost
