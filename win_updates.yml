@@ -36,7 +36,8 @@
           - Windows Defender
         state: searched
       register: list_of_found_updates
-      until: list_of_found_updates.rc == 0
+      register: task_result
+      until: task_result.rc == 0
       retries: 3
       delay: 10
 
