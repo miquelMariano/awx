@@ -33,6 +33,7 @@
           - Drivers
           - Definition Updates
           - Windows Defender
+          - Unclassified
         state: searched
       register: list_of_found_updates
 
@@ -64,6 +65,7 @@
           - Drivers
           - Definition Updates
           - Windows Defender
+          - Unclassified
         reboot: yes 
       when:
           - install_updates|bool == true and list_of_found_updates.found_update_count|int != 0
