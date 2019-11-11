@@ -27,7 +27,7 @@
        password: "{{ vc_password }}" 
        validate_certs: no
        esxi_hostname: "{{ esxi_hostname }}"
-       vsan: ensureObjectAccessibility
+#       vsan: ensureObjectAccessibility
        evacuate: yes
        timeout: 3600
        state: present
