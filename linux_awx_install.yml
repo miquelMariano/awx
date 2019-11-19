@@ -23,6 +23,10 @@
   tasks:
     - name: Ensure epel-release repo are installed
       yum:
-        name: epel-release
+        name: "{{ packages }}"
         state: latest
+      vars:
+        pachages:
+           - epel-release
+           - jq 
  
