@@ -36,8 +36,8 @@
         packages:
            - epel-release
            - jq 
- #          - yum-utils
- #          - device-mapper-persistent-data
- #          - lvm2
+           - yum-utils
+           - device-mapper-persistent-data
+           - lvm2
  #          - docker-ce
  
