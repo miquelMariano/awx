@@ -21,7 +21,14 @@
 - hosts: "{{ servers }}"
   gather_facts: no
   tasks:
-    - name: Ensure epel-release repo and jq are installed
+
+    - name: Add docker-ce repository
+      yum_repository:
+        name: docker-ce.repo
+        description: docker-ce repository
+      baseurl: https://download.docker.com/linux/centos/
+
+    - name: Install required packages
       yum:
         name: "{{ packages }}"
         state: latest
@@ -29,4 +36,8 @@
         packages:
            - epel-release
            - jq 
+           - yum-utils
+           - device-mapper-persistent-data
+           - lvm2
+           - docker-ce
  
