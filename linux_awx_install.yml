@@ -26,7 +26,7 @@
       yum_repository:
         name: docker-ce.repo
         description: docker-ce repository
-      baseurl: https://download.docker.com/linux/centos/
+        baseurl: https://download.docker.com/linux/centos/
 
     - name: Install required packages
       yum:
