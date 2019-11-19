@@ -1,0 +1,8 @@
+---
+
+- hosts: "{{ servers }}"
+  user: root
+  roles:
+    - role: common
+
+
