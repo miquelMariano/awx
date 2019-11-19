@@ -1,0 +1,28 @@
+---
+#DESCRIPTION
+#   Install Ansible AWX
+
+#NOTES 
+#   File Name  : linux_awx_install.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+
+#USAGE
+#   
+#
+#   
+#
+
+#CHANGELOG
+#   v1 19/11/2019   Playbook creation
+#    
+
+
+- hosts: "{{ servers }}"
+  gather_facts: no
+  tasks:
+    - name: Ensure epel-release repo are installed
+      yum:
+        name: epel-release
+        state: latest
+ 
