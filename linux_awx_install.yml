@@ -43,4 +43,14 @@
            - device-mapper-persistent-data
            - lvm2
            - docker-ce
+
+    - name: Make sure a service is enabled and running
+      systemd:
+        state: started
+        name: docker
+        enabled: yes
+        masked: no
+
+
+
  
