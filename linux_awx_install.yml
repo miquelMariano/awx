@@ -43,6 +43,7 @@
            - device-mapper-persistent-data
            - lvm2
            - docker-ce
+           - docker-compose
 
     - name: Make sure a service is enabled and running
       systemd:
