@@ -58,6 +58,7 @@
         name:
           - ansible
           - docker-compose
+        extra_args: --upgrade
 
 
 
