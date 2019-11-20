@@ -56,6 +56,7 @@
     - name: Install Python library dependencies
       pip:
         name:
+          - pip
           - ansible
           - docker-compose
         extra_args: --upgrade
