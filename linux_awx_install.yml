@@ -53,13 +53,19 @@
         enabled: yes
         masked: no
 
-    - name: Install Python library dependencies
+    - name: Update Python pip
       pip:
         name:
           - pip
+        extra_args: --upgrade
+
+    - name: Install Python library dependencies
+      pip:
+        name:
           - ansible
           - docker-compose
         extra_args: --upgrade
+
 
 
 
