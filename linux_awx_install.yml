@@ -44,6 +44,7 @@
            - lvm2
            - docker-ce
            - docker-compose
+           - python2-pip
 
     - name: Make sure a service is enabled and running
       systemd:
@@ -51,6 +52,12 @@
         name: docker
         enabled: yes
         masked: no
+
+    - name: Install Python library dependencies
+      pip:
+        name:
+          - ansible
+          - docker-compose
 
 
 
