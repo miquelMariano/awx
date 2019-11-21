@@ -28,7 +28,7 @@
 #   v3 17/09/2019   Add "awx_nodes" var 
 #   
 
-- hosts: localhost
+- hosts: ansible
   gather_facts: no
   serial: 1
   vars:
