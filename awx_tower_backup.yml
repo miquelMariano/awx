@@ -29,7 +29,6 @@
 #   
 
 - hosts: localhost
-  delegate_to: localhost
   gather_facts: no
   serial: 1
   vars:
