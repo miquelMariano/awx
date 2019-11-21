@@ -28,7 +28,8 @@
 #   v3 17/09/2019   Add "awx_nodes" var 
 #   
 
-- hosts: all
+- hosts: localhost
+  delegate_to: localhost
   gather_facts: no
   serial: 1
   vars:
