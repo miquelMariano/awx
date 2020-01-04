@@ -37,7 +37,7 @@
         state: searched
       register: list_of_found_updates
 
-    - name: Reboot server > ""{{ inventory_hostname }}""
+    - name: Reboot server > {{ inventory_hostname }}
       win_reboot:
          reboot_timeout: 3600
       when:
@@ -50,8 +50,7 @@
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
         chat_id: '6343788'
-        msg: Host {{ inventory_hostname }} >> {{ list_of_found_updates.found_update_count }} found updates.
-      ignore_errors: yes
+        msg: Windows update >> {{ inventory_hostname }}. Found updates >> {{ list_of_found_updates.found_update_count }} Reboot required >> {{ list_of_found_updates.reboot_required }}
       delegate_to: localhost
 
     - name: Install all windows updates
