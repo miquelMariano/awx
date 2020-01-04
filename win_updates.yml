@@ -5,7 +5,7 @@
 #NOTES 
 #   File Name  : win_updates.yml
 #   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
-#   Version    : 4
+#   Version    : 7
 
 #USAGE
 #   ansible-playbook playbooks/win_update.yml -i inventory/servers -e "servers=dc install_updates=false"
@@ -54,7 +54,7 @@
            ===================================
            Windows update  >> {{ inventory_hostname }}
            Found Updates   >> {{ list_of_found_updates.found_update_count }} 
-           Updates         >> {{ list_of_found_updates.updates[] }} 
+           Updates         >> {{ list_of_found_updates.updates }} 
            Reboot required >> {{ list_of_found_updates.reboot_required }}
       delegate_to: localhost
 
