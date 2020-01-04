@@ -51,8 +51,8 @@
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
         chat_id: '6343788'
         msg: | 
-           ===================================
-           Windows update  >> {{ inventory_hostname }}
+           ========== WINDOWS UPDATE ==========
+           Server          >> {{ inventory_hostname }}
            Found Updates   >> {{ list_of_found_updates.found_update_count }} 
            Updates         >> {{ list_of_found_updates.updates }} 
            Reboot required >> {{ list_of_found_updates.reboot_required }}
