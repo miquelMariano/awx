@@ -52,9 +52,9 @@
         chat_id: '6343788'
         msg: | 
            ========== WINDOWS UPDATE ==========
-           Server          >> {{ inventory_hostname }}
-           Found Updates   >> {{ list_of_found_updates.found_update_count }} 
-           Updates         >> {{ list_of_found_updates.updates }} 
+           Server >>>>>>>>>>> {{ inventory_hostname }}
+           Found Updates >>>> {{ list_of_found_updates.found_update_count }} 
+           Updates >>>>>>>>>> {{ list_of_found_updates.updates }} 
            Reboot required >> {{ list_of_found_updates.reboot_required }}
       delegate_to: localhost
 
