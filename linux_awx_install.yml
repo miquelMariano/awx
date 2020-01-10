@@ -22,24 +22,10 @@
   gather_facts: no
   tasks:
 
-    - name: Install required packages
-      yum:
-        name: "{{ item }}"
-        state: latest
-      with_items:
-         - git gcc 
-         - gcc-c++ 
-         - nodejs 
-         - gettext 
-         - device-mapper-persistent-data 
-         - lvm2 
-         - bzip2 
-         - python-pip 
-         - yum-utils 
-         - ansible
 
-#    - name: Add docker-ce repository
-#      shell: yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+    - name: Add docker-ce repository
+      shell: yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+
   
 #    - name: Add docker-ce repository
 #      yum_repository:
@@ -47,27 +33,40 @@
 #        description: docker-ce repository
 #        baseurl: https://download.docker.com/linux/centos/docker-ce.repo
 
-    
+    - name: Install required packages
+      yum:
+        name: "{{ packages }}"
+        state: latest
+      vars:
+        packages:
+           - epel-release
+           - jq 
+           - yum-utils
+           - device-mapper-persistent-data
+           - lvm2
+           - docker-ce
+           - docker-compose
+           - python2-pip
 
-#    - name: Make sure a service is enabled and running
-#      systemd:
-#        state: started
-#        name: docker
-#        enabled: yes
-#        masked: no
+    - name: Make sure a service is enabled and running
+      systemd:
+        state: started
+        name: docker
+        enabled: yes
+        masked: no
 
-#    - name: Update Python pip
-#      pip:
-#        name:
-#          - pip
-#        extra_args: --upgrade
+    - name: Update Python pip
+      pip:
+        name:
+          - pip
+        extra_args: --upgrade
 
-#    - name: Install Python library dependencies
-#      pip:
-#        name:
-#          - ansible
-#          - docker-compose
-#        extra_args: --upgrade
+    - name: Install Python library dependencies
+      pip:
+        name:
+          - ansible
+          - docker-compose
+        extra_args: --upgrade
 
 
 
