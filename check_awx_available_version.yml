@@ -21,14 +21,13 @@
   connection: local
   tasks:
     - name: Check current available version of AWX on oficial repository
-      shell: "curl -s https://api.github.com/repos/ansible/awx/tags |egrep name |head -1 |awk '{print $2}' |tr -d ','"
+      command: "curl -s https://api.github.com/repos/ansible/awx/tags |egrep name |head -1 |awk '{print $2}' |tr -d ','"
       register: awx_version_available
       delegate_to: localhost
 
     - name: Check installed AWX Version
-      shell: "tower-cli version2 |grep AWX"
+      command: "tower-cli version |grep AWX"
       register: awx_version_installed
-      delegate_to: localhost
 
     - name: Register variables to use into Tower workflow
       set_stats:
