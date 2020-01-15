@@ -22,11 +22,15 @@
   tasks:
     - name: Check current available version of AWX on oficial repository
       command: "echo hello"
-      register: command_output
+      register: awx_version
       delegate_to: localhost
+
+    - name: Register timestamp variable
+      command: date +%Y%m%d-%H_%M
+      register: timestamp  
 
     - name: Register variables to use into Tower workflow
       set_stats:
         data:
-          telegram_msg: "VM {{ inventory_hostname }} with IP {{ vm_ip }} has been deployed correctly with Ansible on cluster {{ task_output.instance.hw_esxi_host }} "
+          telegram_msg: "La última versión disponible de AWX en fecha {{ timestamp.stdout }} es la {{ awx_version.stdout }} "
 
