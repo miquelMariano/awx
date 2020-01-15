@@ -26,7 +26,7 @@
       delegate_to: localhost
 
     - name: Check installed AWX Version
-      shell: "echo hola"
+      shell: "tower-cli version |grep AWX"
       register: awx_version_installed
 
     - name: Register variables to use into Tower workflow
@@ -34,6 +34,6 @@
         data:
           telegram_msg: |
                     Check AWX version on {{ inventory_hostname }}
-                    Version installed {{ awx_version_installed.stdout }}
-                    Version available {{ awx_version_available.stdout }}
+                    Version installed: {{ awx_version_installed.stdout }}
+                    Version available: {{ awx_version_available.stdout }}
 
