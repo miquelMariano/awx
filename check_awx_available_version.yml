@@ -26,7 +26,7 @@
       delegate_to: localhost
 
     - name: Check installed AWX Version
-      shell: "tower-cli version"
+      shell: "echo tower-cli version |grep AWX"
       register: awx_version_installed
 
     - name: Register variables to use into Tower workflow
