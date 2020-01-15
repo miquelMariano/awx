@@ -17,7 +17,6 @@
 #  
 
 - hosts: "{{ servers }}"
-  gather_facts: no
   connection: local
   tasks:
     - name: Check current available version of AWX on oficial repository
