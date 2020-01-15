@@ -17,6 +17,7 @@
 #  
 
 - hosts: "{{ servers }}"
+  gather_facts: no
   connection: local
   tasks:
     - name: Check current available version of AWX on oficial repository
@@ -29,6 +30,11 @@
       register: awx_version_installed
       args:
         chdir: /etc/ansible
+
+    - name: Backup AWX/Tower using tower-cli
+      shell: "tower-cli receive --tower-host http://localhost --all >  /tmp/backup.json"
+      register: output
+      ignore_errors: yes    
 
     - name: Register variables to use into Tower workflow
       set_stats:
