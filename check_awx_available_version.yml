@@ -22,15 +22,19 @@
   tasks:
     - name: Check current available version of AWX on oficial repository
       shell: "curl -s https://api.github.com/repos/ansible/awx/tags |egrep name |head -1 |awk '{print $2}' |tr -d ','"
-      register: awx_version
+      register: awx_version_available
       delegate_to: localhost
 
-    - name: Register timestamp variable
-      command: date +%Y%m%d-%H_%M
-      register: timestamp  
+    - name: Check installed AWX Version
+      shell: "tower-cli version |grep AWX"
+      register: awx_version_installed
+      delegate_to: localhost
 
     - name: Register variables to use into Tower workflow
       set_stats:
         data:
-          telegram_msg: "La última versión disponible de AWX en fecha {{ timestamp.stdout }} es la {{ awx_version.stdout }} "
+          telegram_msg: |
+                    Check AWX version on {{ inventory_hostname }}
+                    Version installed {{ awx_version_installed.stdout }}
+                    Version available {{ awx_version_available.stdout }}
 
