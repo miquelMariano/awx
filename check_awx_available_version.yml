@@ -1,0 +1,32 @@
+---
+
+#DESCRIPTION
+#   This playbook check current available version of AWX on oficial repository
+#   https://github.com/ansible/awx/releases
+
+#NOTES 
+#   File Name  : check_awx_available_version.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+
+#USAGE
+#   
+#   
+#CHANGELOG
+#   v1 15/01/2020  	Playbook creation
+#  
+
+- hosts: "{{ servers }}"
+  gather_facts: no
+  connection: local
+  tasks:
+    - name: Check current available version of AWX on oficial repository
+      command: "curl -s https://api.github.com/repos/ansible/awx/tags |egrep name |head -1 |awk '{print $2}' |tr -d '"|,'"
+      register: command_output
+      delegate_to: localhost
+
+    - name: Register variables to use into Tower workflow
+      set_stats:
+        data:
+          telegram_msg: "VM {{ inventory_hostname }} with IP {{ vm_ip }} has been deployed correctly with Ansible on cluster {{ task_output.instance.hw_esxi_host }} "
+
