@@ -25,7 +25,7 @@
       delegate_to: localhost
 
     - name: Check installed AWX Version
-      shell: "tower-cli version |grep AWX"
+      command: "tower-cli version |grep AWX"
       register: awx_version_installed
       args:
         chdir: /etc/ansible
