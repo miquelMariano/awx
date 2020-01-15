@@ -21,7 +21,7 @@
   connection: local
   tasks:
     - name: Check current available version of AWX on oficial repository
-      command: "curl -s https://api.github.com/repos/ansible/awx/tags |egrep name |head -1 |awk '{print $2}' |tr -d '"|,'"
+      command: "echo hello"
       register: command_output
       delegate_to: localhost
 
