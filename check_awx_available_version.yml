@@ -26,15 +26,10 @@
       delegate_to: localhost
 
     - name: Check installed AWX Version
-      command: "echo hola"
+      command: "tower-cli version |grep AWX"
       register: awx_version_installed
       args:
-        chdir: /etc/ansible
-
-    - name: Backup AWX/Tower using tower-cli
-      shell: "tower-cli receive --tower-host http://localhost --all >  /tmp/backup.json"
-      register: output
-      ignore_errors: yes    
+        chdir: /etc/ansible  
 
     - name: Register variables to use into Tower workflow
       set_stats:
