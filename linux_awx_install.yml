@@ -96,4 +96,18 @@
         permanent: yes
         state: enabled
 
+    - name: Install Tower-CLI
+      pip:
+        name: ansible-tower-cli
+
+    - name: Configure Ansible Tower-CLI
+      shell: "{{ items}}"
+      with_items:
+         - tower-cli config host http://localhost
+         - tower-cli config username admin
+         - tower-cli config password password
+         - tower-cli config verify_ssl False
+
+
+
 
