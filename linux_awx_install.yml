@@ -70,7 +70,7 @@
       pip:
         name: docker-compose==1.23.2
 
-    - name: Download AWX packages version: {{ version }}
+    - name: Download AWX packages version {{ version }}
       get_url:
         url: "https://github.com/ansible/awx/archive/{{ version }}.tar.gz"
         dest: /tmp/
