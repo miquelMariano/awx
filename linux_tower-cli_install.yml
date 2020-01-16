@@ -1,0 +1,62 @@
+---
+#DESCRIPTION
+#   Install Ansible Tower CLI
+
+#NOTES 
+#   File Name  : linux_tower-cli_install.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+
+#USAGE
+#   
+#
+#   
+#
+
+#CHANGELOG
+#   v1 15/01/2020   Playbook creation
+#   
+
+
+- hosts: "{{ servers }}"
+  gather_facts: no
+  tasks:
+
+    - name: Install EPEL repo
+      yum:
+        name: epel-release
+        state: latest
+
+#    - name: Install required packages
+#      yum:
+#        name: "{{ packages }}"
+#        state: latest
+#      vars:
+#        packages:
+#           - git
+#           - gcc
+#           - gcc-c++
+#           - nodejs
+#           - gettext
+#           - device-mapper-persistent-data
+#           - lvm2
+#           - bzip2
+#           - python-pip
+#           - yum-utils
+#           - ansible
+
+    - name: Install Tower-CLI
+      pip:
+        name: ansible-tower-cli
+
+    - name: Configure Ansible Tower-CLI
+      shell: "{{ item }}"
+      with_items:
+         - tower-cli config host http://localhost
+         - tower-cli config username admin
+         - tower-cli config password password
+         - tower-cli config verify_ssl False
+
+
+
+

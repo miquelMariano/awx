@@ -5,7 +5,7 @@
 #NOTES 
 #   File Name  : linux_awx_install.yml
 #   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
-#   Version    : 1
+#   Version    : 2
 
 #USAGE
 #   
@@ -15,7 +15,7 @@
 
 #CHANGELOG
 #   v1 19/11/2019   Playbook creation
-#   v1 16/01/2020   Update process
+#   v2 16/01/2020   Update process
 
 
 - hosts: "{{ servers }}"
@@ -95,19 +95,3 @@
         service: https
         permanent: yes
         state: enabled
-
-    - name: Install Tower-CLI
-      pip:
-        name: ansible-tower-cli
-
-    - name: Configure Ansible Tower-CLI
-      shell: "{{ item }}"
-      with_items:
-         - tower-cli config host http://localhost
-         - tower-cli config username admin
-         - tower-cli config password password
-         - tower-cli config verify_ssl False
-
-
-
-
