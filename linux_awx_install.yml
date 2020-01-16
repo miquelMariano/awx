@@ -77,14 +77,24 @@
         mode: '0755' 
 
     - name: Extract AWX installer
-      unarchive: 
-        src: "/tmp/awx-{{ version }}.tar.gz"
-        dest: "/tmp/{{ version }}"
+      shell: "tar xvfz awx-$LATEST_AWX.tar.gz"
+      args:
+        chdir: /tmp/ 
+        
+#    - name: Extract AWX installer
+#      unarchive: 
+#        src: "/tmp/awx-{{ version }}.tar.gz"
+#        dest: "/tmp/{{ version }}"
 
     - name: Remove AWX pachages compressed
       file:
         path: "/tmp/awx-{{ version }}.tar.gz"
-        state: absent         
+        state: absent    
+
+    - name: Install AWX
+      shell: "ansible-playbook -i inventory install.yml"
+      args:
+          chdir: /tmp/{{ version }}/installer    
 
 
 
