@@ -74,7 +74,17 @@
       get_url:
         url: "https://github.com/ansible/awx/archive/{{ version }}.tar.gz"
         dest: /tmp/
-        mode: '0755'       
+        mode: '0755' 
+
+    - name: Extract AWX installer
+      unarchive: 
+        src: "/tmp/{{ version }}.tar.gz"
+        dest: "/tmp/{{ version }}"
+
+    - name: Remove AWX pachages compressed
+      file:
+        path: "/tmp/{{ version }}.tar.gz"
+        state: absent         
 
 
 
