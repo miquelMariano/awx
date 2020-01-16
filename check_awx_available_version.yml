@@ -26,11 +26,9 @@
       delegate_to: localhost
 
     - name: Check installed AWX Version
-      command: "tower-cli version |grep AWX"
+      shell: "tower-cli version |grep AWX"
       register: awx_version_installed
-      args:
-        chdir: /etc/ansible  
-
+      
     - name: Register variables to use into Tower workflow
       set_stats:
         data:
