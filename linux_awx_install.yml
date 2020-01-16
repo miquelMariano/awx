@@ -39,10 +39,11 @@
            - nodejs
            - gettext
            - device-mapper-persistent-data
-   #        - lvm2 bzip2
-  #         - python-pip
- #          - yum-utils
-#           - ansible
+           - lvm2
+           - bzip2
+           - python-pip
+           - yum-utils
+           - ansible
 
 
 
