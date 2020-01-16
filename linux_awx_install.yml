@@ -73,7 +73,7 @@
     - name: Download AWX packages version: {{ version }}
       get_url:
         url: "https://github.com/ansible/awx/archive/{{ version }}.tar.gz"
-        dest: /etc/foo.conf
+        dest: /tmp/
         mode: '0755'       
 
 
