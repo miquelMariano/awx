@@ -63,7 +63,7 @@
         enabled: yes
         masked: no  
 
-    - namne: Install Docker docker-compose
+    - name: Install Docker docker-compose
       pip:
         name: docker-compose   
 
