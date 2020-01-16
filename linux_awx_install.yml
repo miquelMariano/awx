@@ -78,12 +78,12 @@
 
     - name: Extract AWX installer
       unarchive: 
-        src: "/tmp/{{ version }}.tar.gz"
+        src: "/tmp/awx-{{ version }}.tar.gz"
         dest: "/tmp/{{ version }}"
 
     - name: Remove AWX pachages compressed
       file:
-        path: "/tmp/{{ version }}.tar.gz"
+        path: "/tmp/awx-{{ version }}.tar.gz"
         state: absent         
 
 
