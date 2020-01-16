@@ -80,7 +80,7 @@
       shell: "tar xvfz awx-$LATEST_AWX.tar.gz"
       args:
         chdir: /tmp/ 
-        
+
 #    - name: Extract AWX installer
 #      unarchive: 
 #        src: "/tmp/awx-{{ version }}.tar.gz"
@@ -94,36 +94,12 @@
     - name: Install AWX
       shell: "ansible-playbook -i inventory install.yml"
       args:
-          chdir: /tmp/{{ version }}/installer    
+          chdir: /tmp/{{ version }}/installer
+
+    - name: Configure firewall
+      firewalld:
+        service: https
+        permanent: yes
+        state: enabled
 
 
-
-  
-
-
-    
-
-#    - name: Make sure a service is enabled and running
-#      systemd:
-#        state: started
-#        name: docker
-#        enabled: yes
-#        masked: no
-
-#    - name: Update Python pip
-#      pip:
-#        name:
-#          - pip
-#        extra_args: --upgrade
-
-#    - name: Install Python library dependencies
-#      pip:
-#        name:
-#          - ansible
-#          - docker-compose
-#        extra_args: --upgrade
-
-
-
-
- 
