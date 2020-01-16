@@ -45,17 +45,29 @@
            - yum-utils
            - ansible
 
+    - name: Add docker-ce repository
+      yum_repository:
+        name: docker-ce
+        description: docker-ce repository
+        baseurl: https://download.docker.com/linux/centos/docker-ce.repo
 
+    - name: Install Docker CE
+      yum:
+        name: docker-ce
+        state: latest  
+
+    - name: Enable Docker CE service
+      systemd:
+        state: started
+        name: docker
+        enabled: yes
+        masked: no  
 
 #    - name: Add docker-ce repository
 #      shell: yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
 
   
-#    - name: Add docker-ce repository
-#      yum_repository:
-#        name: docker-ce
-#        description: docker-ce repository
-#        baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+
 
     
 
