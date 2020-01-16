@@ -16,7 +16,7 @@
 #   v1 15/01/2020  	Playbook creation
 #  
 
-- hosts: ansible
+- hosts: "{{ servers }}"
   gather_facts: no
   tasks:
     - name: Check current available version of AWX on oficial repository
