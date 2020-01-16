@@ -54,10 +54,6 @@
          - "{{ awx_nodes }}"
       register: output
       ignore_errors: yes
-
-    - name: Check installed AWX Version
-      shell: "tower-cli version |grep AWX"
-      register: awx_version_installed
       
     - debug:
        var: output

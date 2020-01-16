@@ -16,7 +16,7 @@
 #   v1 15/01/2020  	Playbook creation
 #  
 
-- hosts: "{{ servers }}"
+- hosts: ansible
   gather_facts: no
   connection: local
   tasks:
