@@ -77,7 +77,7 @@
         mode: '0755' 
 
     - name: Extract AWX installer
-      shell: "tar xvfz awx-$LATEST_AWX.tar.gz"
+      shell: "tar xvfz awx-{{ version }}.tar.gz"
       args:
         chdir: /tmp/ 
 
