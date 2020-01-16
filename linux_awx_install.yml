@@ -68,7 +68,7 @@
 
     - name: Install Docker docker-compose
       pip:
-        name: docker-compose   
+        name: docker-compose==1.23.2  
 
 
 
