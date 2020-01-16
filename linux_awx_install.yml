@@ -15,7 +15,7 @@
 
 #CHANGELOG
 #   v1 19/11/2019   Playbook creation
-#    
+#   v1 16/01/2020   Update process
 
 
 - hosts: "{{ servers }}"
@@ -44,12 +44,6 @@
            - python-pip
            - yum-utils
            - ansible
-
-#    - name: Add docker-ce repository
-#      yum_repository:
-#        name: docker-ce
-#        description: docker-ce repository
-#        baseurl: https://download.docker.com/linux/centos/docker-ce.repo
 
     - name: Add docker-ce repository
       shell: "yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo"      
