@@ -1,0 +1,48 @@
+---
+#DESCRIPTION
+#   Restore AWX/Tower using tower-cli
+
+#NOTES 
+#   File Name  : awx_tower_restore.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+#
+#USAGE
+#   ansible-playbook playbooks/awx_tower_restore -i inventory/servers
+#
+#   use "tower-cli send --tower-host http://192.168.6.152 file.json" to restore
+#
+#
+#REQUIREMENTS
+#
+#   awx_nodes:
+#     - 192.168.6.163
+#     - 192.168.6.151
+#     - 192.168.6.152
+#     - 192.168.6.19
+#
+#    backup_file: 20200130-09_30_192.168.6.152.json
+#
+#CHANGELOG
+#   v1 30/01/2020   Playbook creation
+#   
+#   
+
+- hosts: ansible
+  gather_facts: no
+  serial: 1
+  vars:
+    backup_folder: /etc/ansible/awx-backup
+
+  tasks:
+  
+    - name: Restore AWX/Tower using tower-cli
+      shell: "tower-cli receive --tower-host http://{{ item }} --all >  {{ backup_folder }}/{{ timestamp.stdout }}_{{ item }}.json"
+      shell: "time tower-cli send --tower-host http://{{ item }} {{ backup_folder }}/{{ backup_file }}"
+      with_items:
+         - "{{ awx_nodes }}"
+      register: output
+      ignore_errors: yes
+      
+
+       
