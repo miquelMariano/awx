@@ -1,0 +1,41 @@
+---
+#DESCRIPTION
+#   Install/Uninstall Windows packages
+
+#NOTES 
+#   File Name  : win_chocolatey.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+#
+#USAGE
+#   
+#
+#   
+#
+#
+#REQUIREMENTS
+#
+#   packages:
+#     - 192.168.6.163
+#     - 192.168.6.151
+#     - 192.168.6.152
+#     - 192.168.6.19
+#
+#    state: absent | downgrade | latest | present | reinstalled
+#
+#CHANGELOG
+#   v1 30/01/2020   Playbook creation
+#   
+#   
+
+- hosts: "{{ servers }}"
+  tasks:
+    - name: Install multiple packages
+      win_chocolatey:
+         name: "{{ item }}"
+         state: "{{ state }}"
+      with_items:
+         - "{{ packages }}"
+      
+
+       
