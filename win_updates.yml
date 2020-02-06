@@ -31,7 +31,7 @@
           - Updates
           - Windows Server 2016
           - Drivers
-          - Definition Updates
+#          - Definition Updates
           - Windows Defender
           - Unclassified
         state: searched
@@ -67,7 +67,7 @@
           - Updates
           - Windows Server 2016
           - Drivers
-          - Definition Updates
+#          - Definition Updates
           - Windows Defender
           - Unclassified
         reboot: yes 
