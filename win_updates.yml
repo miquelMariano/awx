@@ -18,6 +18,7 @@
 #   v5 10/09/2019   Remove notification after updates installed
 #   v6 11/09/2019   Add quote on chat_id var
 #   v7 04/01/2020   Separate telegram message in multiple lines
+#   v7 21/02/2020   Comment Definition Updates & Windows Defender
 
 - hosts: "{{ servers }}"
   serial: 1
@@ -32,7 +33,7 @@
           - Windows Server 2016
           - Drivers
 #          - Definition Updates
-          - Windows Defender
+#          - Windows Defender
           - Unclassified
         state: searched
       register: list_of_found_updates
@@ -68,7 +69,7 @@
           - Windows Server 2016
           - Drivers
 #          - Definition Updates
-          - Windows Defender
+#          - Windows Defender
           - Unclassified
         reboot: yes 
       when:
