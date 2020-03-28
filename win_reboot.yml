@@ -21,18 +21,7 @@
 
     - name: Check system uptime > '{{ inventory_hostname }}' before reboot
       win_shell: 'Get-CimInstance -ClassName win32_operatingsystem | select lastbootuptime | ft -HideTableHeaders'
-      register: uptime
-
-    - debug:
-        var: uptime
-
-    - name: Send telegram uptime info before reboot
-      telegram:
-        token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-        chat_id: '6343788'
-        msg: '{{ inventory_hostname }} boot uptime before reboot: {{ uptime.stdout_lines[1] }}'
-      ignore_errors: yes
-      delegate_to: localhost
+      register: uptime_before
 
     - name: Reboot server > '{{ inventory_hostname }}'
       win_reboot:
@@ -42,13 +31,18 @@
 
     - name: Check system uptime > '{{ inventory_hostname }}' after reboot
       win_shell: 'Get-CimInstance -ClassName win32_operatingsystem | select lastbootuptime | ft -HideTableHeaders'
-      register: uptime
+      register: uptime_after
 
     - name: Send telegram uptime info after reboot
       telegram:
         token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
         chat_id: '6343788'
         msg: '{{ inventory_hostname }} boot uptime after reboot: {{ uptime.stdout_lines[1] }}'
+        msg: | 
+           ========== WINDOWS UPTIME INFO ==========
+           Server >>>>>>>>>>> {{ inventory_hostname }}
+           Boot time before reboot >>>> {{ uptime_before.stdout_lines[1] }}
+           Boot time after reboot >>>> {{ uptime_after.stdout_lines[1] }}
       ignore_errors: yes
       delegate_to: localhost
       when:
