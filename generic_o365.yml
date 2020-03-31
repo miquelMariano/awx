@@ -1,0 +1,37 @@
+---
+
+#DESCRIPTION
+#   This playbook sent mail using Office 365 SMTP
+
+#NOTES 
+#   File Name  : generic_o365.yml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+
+#USAGE
+#   ansible-playbook playbooks/gmail.yml -i inventory/servers -e "pass=my_pass"
+#   It is required to create an application password:
+#   https://support.office.com/es-es/article/crear-una-contrase%C3%B1a-de-aplicaci%C3%B3n-para-office-365-3e7c860f-bda4-4441-a618-b53953ee1183
+#   
+#CHANGELOG
+#   v1 31/03/2020  	Clone from generic_gmail.yml
+#   
+
+- hosts: ansible
+  gather_facts: no
+  vars:
+    - body_msg: This mail has been sent from Ansible playbook
+  tasks:
+     - name: Sending email
+       mail:
+         host: smtp.office365.com
+         port: 587
+         username: miquel.mariano@ncora.com
+         password: "{{ pass }}"
+         from: Ansible <miquel.mariano@ncora.com>
+         to: miquel.mariano@ncora.com
+#        cc: CC_EMAIL@gmail.com
+         subject: Hello world from Ansible
+         body: "{{ body_msg }}"
+       delegate_to: localhost   
+
