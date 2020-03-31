@@ -80,12 +80,11 @@
 
     - name: Send backup to mail when backup is OK
       mail:
-         host: smtp.gmail.com
-         port: 465
-         secure: always
-         username: miquel.mariano0@gmail.com
+         host: smtp.office365.com
+         port: 587
+         username: miquel.mariano@ncora.com
          password: "{{ pass }}"
-         from: Ansible <miquel.mariano0@gmail.com>
+         from: Ansible <miquel.mariano@ncora.com>
          to: miquel.mariano@ncora.com
 #        cc: CC_EMAIL@gmail.com
          subject: "AWX/Tower backup {{ timestamp.stdout }}"
