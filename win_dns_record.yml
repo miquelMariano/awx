@@ -32,10 +32,11 @@
        state: "{{ item.state }}"
        value: "{{ item.value }}"
        zone: "{{ dns_zone }}"
+     when:
+          - item.state == "present"
      with_items:
           - "{{ records }}"
-     when:
-          - records.state == "present"  
+       
 
    - name: Delete DNS static record
      win_dns_record:
@@ -43,10 +44,11 @@
        type: "{{ item.type }}"
        state: "{{ item.state }}"
        zone: "{{ dns_zone }}"
+     when:
+          - item.state == "absent"
      with_items:
           - "{{ records }}" 
-     when:
-          - records.state == "absent"           
+                
 
 
             
