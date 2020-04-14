@@ -9,7 +9,13 @@
 
 #USAGE
 #   ansible-playbook playbooks/win_dns_record.yml -i inventory/servers
-#   
+# 
+#VARIABLES
+#servers: dc01.lab.local
+#dns_zone: lab.local
+#records:
+#  - { type: A, state: present, name: prueba-awx, value: 10.0.0.1}
+#
 #CHANGELOG
 #   v1 13/04/2020  Playbook creation
 #   
@@ -19,11 +25,11 @@
   serial: 1
   tasks:
 
-   - name: Add static record
+   - name: Manage DNS static record
      win_dns_record:
        name: "{{ item.name }}"
        type: "{{ item.type }}"
-       state: present
+       state: "{{ item.state }}"
        value: "{{ item.value }}"
        zone: "{{ dns_zone }}"
      with_items:
