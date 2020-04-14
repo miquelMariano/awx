@@ -25,7 +25,7 @@
   serial: 1
   tasks:
 
-   - name: Manage DNS static record
+   - name: Add DNS static record
      win_dns_record:
        name: "{{ item.name }}"
        type: "{{ item.type }}"
@@ -34,4 +34,19 @@
        zone: "{{ dns_zone }}"
      with_items:
           - "{{ records }}"
+     when:
+          - "{{ records.state }}" == present  
+
+   - name: Delete DNS static record
+     win_dns_record:
+       name: "{{ item.name }}"
+       type: "{{ item.type }}"
+       state: "{{ item.state }}"
+       zone: "{{ dns_zone }}"
+     with_items:
+          - "{{ records }}" 
+     when:
+          - "{{ records.state }}" == absent           
+
+
             
