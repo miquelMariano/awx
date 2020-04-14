@@ -21,9 +21,10 @@
 
    - name: Add static record
      win_dns_record:
-       name: "db1"
-       type: "A"
+       name: "{{ item.name }}"
+       type: "{{ item.type }}"
        state: present
+       value: "{{ item.value }}"
        zone: "{{ dns_zone }}"
      with_items:
           - "{{ records }}"
