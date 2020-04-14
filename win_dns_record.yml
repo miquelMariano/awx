@@ -35,7 +35,7 @@
      with_items:
           - "{{ records }}"
      when:
-          - "{{ records.state }}" == present  
+          - records.state == "present"  
 
    - name: Delete DNS static record
      win_dns_record:
@@ -46,7 +46,7 @@
      with_items:
           - "{{ records }}" 
      when:
-          - "{{ records.state }}" == absent           
+          - records.state == "absent"           
 
 
             
