@@ -31,7 +31,7 @@
        type: "{{ item.type }}"
        state: "{{ item.state }}"
        value: "{{ item.value }}"
-       zone: "{{ dns_zone }}"
+       zone: "{{ item.dns_zone }}"
      when:
           - item.state == "present"
      with_items:
@@ -43,7 +43,7 @@
        name: "{{ item.name }}"
        type: "{{ item.type }}"
        state: "{{ item.state }}"
-       zone: "{{ dns_zone }}"
+       zone: "{{ item.dns_zone }}"
      when:
           - item.state == "absent"
      with_items:
