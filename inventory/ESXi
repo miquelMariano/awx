@@ -1,0 +1,206 @@
+##To copy ansible ssh-key to esxi nodes
+## cat /root/.ssh/id_rsa.pub | ssh root@logviesxi41p.logitravelzone.local \ 'cat >> /etc/ssh/keys-root/authorized_keys'
+[all:children]
+GS
+IX
+#HPE
+
+[ansible]
+logmdncora02
+
+[HPE]
+loggsesxihpe01 scratch_dir='GS_LOGGSESXiHPE01-local' fabric1='vmhba1' fabric2='vmhba2'
+logixesxihpe01 scratch_dir='IX_LOGIXESXiHPE01-local' fabric1='vmhba1' fabric2='vmhba2'
+
+[LOGGSCHBL01]
+loggsesxi01 fabric1='vmhba2' fabric2='vmhba3'
+loggsesxi[02:15] fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi03 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi04 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi05 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi06 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi07 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi08 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi09 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi10 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi11 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi12 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi13 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi14 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi15 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi16
+
+[LOGGSCHBL02]
+loggsesxi17 fabric1='vmhba2' fabric2='vmhba3' ip_ilo='172.25.33.37' mac_ilo='70:10:6F:AD:C9:E2' username_ilo='dpm' pass_ilo='VmwarE2016!'
+loggsesxi[18:20] fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi19 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi20 fabric1='vmhba64' fabric2='vmhba65'
+loggsesxi21 fabric1='vmhba0' fabric2='vmhba1'
+loggsesxi[22:31] fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi22 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi23 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi24 fabric1='vmhba64' fabric2='vmhba65'
+loggsesxi25 fabric1='vmhba64' fabric2='vmhba65' port1_name='LOGGSCH02BL09_Port01' port1_wwn='50060b0000c26640' port1_hg_cross='CL2-J-3' port1_hg_gad='CL2-J-2' port2_name='LOGGSCH02BL09_Port02' port2_wwn='50060b0000c26642' port2_hg_cross='CL1-L-3' port2_hg_gad='CL1-L-2' cross_cci_inst='-I301'
+#loggsesxi26 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi27 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi28 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi29 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi30 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi31 fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi32
+
+[LOGGSCHBL03]
+loggsesxi33 fabric1='vmhba2' fabric2='vmhba3'
+loggsesxi[34:37] fabric1='vmhba64' fabric2='vmhba65'
+loggsesxi35 fabric1='vmhba64' fabric2='vmhba65' port1_name='LOGGSCH03BL03_Port01' port1_wwn='50060b0000c26a08' port1_hg_cross='CL2-J-3' port1_hg_gad='CL2-J-2' port2_name='LOGGSCH03BL03_Port02' port2_wwn='50060b0000c26a0a' port2_hg_cross='CL1-L-3' port2_hg_gad='CL1-L-2' cross_cci_inst='-I301'
+#loggsesxi36
+#loggsesxi37
+loggsesxi38 fabric1='vmhba0' fabric2='vmhba1'
+loggsesxi[39:47] fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi40
+#loggsesxi41
+#loggsesxi42
+#loggsesxi43
+#loggsesxi44
+#loggsesxi45
+#loggsesxi46
+#loggsesxi47
+#loggsesxi48
+
+[LOGGSCHBL04]
+loggsesxi49 fabric1='vmhba2' fabric2='vmhba3'
+loggsesxi[50:63] fabric1='vmhba64' fabric2='vmhba65'
+#loggsesxi51
+#loggsesxi52
+#loggsesxi53
+loggsesxi54 fabric1='vmhba64' fabric2='vmhba65' port1_name='LOGGSCH04BL06_Port01' port1_wwn='50060b0000c26e28' port1_hg_cross='CL2-J-3' port1_hg_gad='CL2-J-2' port2_name='LOGGSCH04BL06_Port02' port2_wwn='50060b0000c26e2a' port2_hg_cross='CL1-L-3' port2_hg_gad='CL1-L-2' cross_cci_inst='-I301'
+#loggsesxi55
+#loggsesxi56
+#loggsesxi57
+#loggsesxi58
+#loggsesxi59
+#loggsesxi60
+#loggsesxi61
+#loggsesxi62
+loggsesxi63 fabric1='vmhba64' fabric2='vmhba65' port1_name='LOGGSCH04BL15_Port01' port1_wwn='50060b0000c26e70' port1_hg_cross='CL2-J-3' port1_hg_gad='CL2-J-2' port2_name='LOGGSCH04BL15_Port02' port2_wwn='50060b0000c26e72' port2_hg_cross='CL1-L-3' port2_hg_gad='CL1-L-2' cross_cci_inst='-I301'
+#loggsesxi64
+
+[LOGGSCHBL05]
+loggsesxi65 fabric1='vmhba0' fabric2='vmhba1' port1_name='LOGGSCH05BL001_Port1' port1_wwn='100042d70ac00010' port1_hg_cross='CL4-J-3' port1_hg_gad='CL4-J-2' port2_name='LOGGSCH05BL01_Port02' port2_wwn='100042d70ac00012' port2_hg_cross='CL3-L-3' port2_hg_gad='CL3-L-2' cross_cci_inst='-I301' 
+loggsesxi66 fabric1='vmhba0' fabric2='vmhba1'
+loggsesxi67 fabric1='vmhba0' fabric2='vmhba1'
+loggsesxi68 fabric1='vmhba0' fabric2='vmhba1'
+loggsesxi69 fabric1='vmhba0' fabric2='vmhba1'
+loggsesxi70 fabric1='vmhba0' fabric2='vmhba1'
+loggsesxi71 fabric1='vmhba0' fabric2='vmhba1'
+loggsesxi72 fabric1='vmhba0' fabric2='vmhba1'
+loggsesxi73 fabric1='vmhba0' fabric2='vmhba1' port1_name='LOGGSCH05BL09_Port01' port1_wwn='100042d70ac00054' port1_hg_cross='CL2-J-3' port1_hg_gad='CL2-J-2' port2_name='LOGGSCH05BL09_Port02' port2_wwn='100042d70ac00056' port2_hg_cross='CL1-L-3' port2_hg_gad='CL1-L-2' cross_cci_inst='-I301'
+loggsesxi74 fabric1='vmhba0' fabric2='vmhba1'
+
+[LOGIXCHBL01]
+logixesxi[01:15] fabric1='vmhba64' fabric2='vmhba65'
+#logixesxi02
+#logixesxi03
+#logixesxi04
+#logixesxi05
+#logixesxi06
+#logixesxi07
+#logixesxi08
+#logixesxi09
+#logixesxi10
+#logixesxi11
+#logixesxi12
+#logixesxi13
+#logixesxi14
+#logixesxi15
+#logixesxi16
+
+[LOGIXCHBL02]
+logixesxi[17:31] fabric1='vmhba64' fabric2='vmhba65'
+#logixesxi18
+#logixesxi19
+#logixesxi20
+#logixesxi21
+#logixesxi22
+#logixesxi23
+#logixesxi24
+#logixesxi25
+#logixesxi26
+#logixesxi27
+#logixesxi28
+#logixesxi29
+#logixesxi30
+#logixesxi31
+#logixesxi32
+
+[LOGIXCHBL03]
+logixesxi[33:47] fabric1='vmhba64' fabric2='vmhba65'
+#logixesxi34
+#logixesxi35
+#logixesxi36
+#logixesxi37
+#logixesxi38
+#logixesxi39
+#logixesxi40
+#logixesxi41
+#logixesxi42
+#logixesxi43
+#logixesxi44
+#logixesxi45
+#logixesxi46
+#logixesxi47
+#logixesxi48
+
+[LOGIXCHBL04]
+logixesxi49 fabric1='vmhba2' fabric2='vmhba3'
+logixesxi[50:63] fabric1='vmhba64' fabric2='vmhba65'
+#logixesxi51
+#logixesxi52
+#logixesxi53
+#logixesxi54
+#logixesxi55
+#logixesxi56
+#logixesxi57
+#logixesxi58
+#logixesxi59
+#logixesxi60
+#logixesxi61
+#logixesxi62
+#logixesxi63
+#logixesxi64
+
+[LOGIXCHBL05]
+logixesxi[65:68] fabric1='vmhba0' fabric2='vmhba1'
+logixesxi69 fabric1='vmhba2' fabric2='vmhba3'
+logixesxi[70:74] fabric1='vmhba0' fabric2='vmhba1'
+
+#[GS:vars]
+#scratch_dir='GS_ISOs-Templates-Logs_LDEV20FF'
+
+#[IX:vars]
+#scratch_dir='IX_ISOs-Templates-Logs_LDEV30FF'
+
+[all:vars]
+dns1='172.25.34.100'
+dns2='172.25.34.101'
+ntp1='172.25.34.100'
+ntp2='172.25.34.101'
+domain='corp.logitravelgroup.com'
+syslog_server='vcenter.corp.logitravelgroup.com'
+scratch_dir='GS_GAD016_ISOs-Templates-Logs_LDEV0016'
+
+[GS:children]
+LOGGSCHBL01
+LOGGSCHBL02
+LOGGSCHBL03
+LOGGSCHBL04
+LOGGSCHBL05
+
+[IX:children]
+LOGIXCHBL01
+LOGIXCHBL02
+LOGIXCHBL03
+LOGIXCHBL04
+LOGIXCHBL05
+
+
