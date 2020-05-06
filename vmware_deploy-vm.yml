@@ -18,6 +18,10 @@
 #   v4 20/08/2019  Separate "Resize disk" on another play. Bug reported in Ansible 2.8.1. https://github.com/ansible/ansible/issues/55551
 #  
 #EXAMPLE INVENTORY ANSIBLE ENGINE
+#[all:children]
+#grupo-test
+#grupo-prueba
+#
 #[grupo-test]
 #test1 vm_ip=10.0.0.20
 #test2 vm_ip=10.0.0.21
@@ -59,12 +63,12 @@
 #[all:vars]
 #vc_hostname=192.168.6.10
 #vc_username=administrator@vsphere.local
-#vc_password=Secret123!
+#vc_password=pass
 #vm_template=miquel-template-W2012R2-Std-ES
 #dc_domain=vmwareporvexperts.local
-#localadminpass=Secret123!
-#domain_admin: miquel.mariano
-#domain_admin_pass: Secret123!
+#localadminpass=pass
+#domain_admin=miquel.mariano
+#domain_admin_pass=pass
 
 
 - hosts: all
@@ -83,10 +87,10 @@
       name: "{{ inventory_hostname }}"
       annotation: "{{ vc_note }}"
 #      state: poweredon
-#      disk:
-#      - size_gb: "{{ vm_disksize}}"
-#        type: thin
-#        datastore: "{{ vm_datastore }}"
+      disk:
+      - size_gb: "{{ vm_disksize}}"
+        type: thin
+        datastore: "{{ vm_datastore }}"
       hardware:
          memory_mb: "{{ vm_memory }}"
          num_cpus: "{{ vm_cpu }}"
