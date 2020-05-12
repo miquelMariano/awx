@@ -22,7 +22,7 @@
     - name: Demo
       win_domain_computer:
         name: "{{ inventory_hostname }}.{{ dc_domain }}"
-#        dns_hostname: one_linux_server.my_org.local
+        dns_hostname: "{{ inventory_hostname }}.{{ dc_domain }}"
         ou: "{{ domain_ou }}"
         description: Demo AWX
         enabled: yes
