@@ -1,48 +1,29 @@
 ---
 #DESCRIPTION
-#   Reboot windows servers
+#   Manage active directory computer accounts
 
 #NOTES 
-#   File Name  : win_reboot.yml
+#   File Name  : win_domain_computer.yml
 #   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
 #   Version    : 1
 
 #USAGE
-#   ansible-playbook playbooks/win_reboot.yml -i inventory/servers -e "servers=horizon confirm_reboot=true"
+#   ansible-playbook playbooks/win_domain_computer.yml -i inventory/servers 
 #   
 #CHANGELOG
-#   v1 19/05/2019  Playbook creation
+#   v1 11/05/2020  Playbook creation
 #   
 #  
 
-- hosts: "{{ servers }}"
+- hosts: vms
   serial: 1
   tasks:
-
-    - name: Check system uptime > '{{ inventory_hostname }}' before reboot
-      win_shell: 'Get-CimInstance -ClassName win32_operatingsystem | select lastbootuptime | ft -HideTableHeaders'
-      register: uptime_before
-
-    - name: Reboot server > '{{ inventory_hostname }}'
-      win_reboot:
-         reboot_timeout: 3600
-      when:
-          - confirm_reboot|bool == true
-
-    - name: Check system uptime > '{{ inventory_hostname }}' after reboot
-      win_shell: 'Get-CimInstance -ClassName win32_operatingsystem | select lastbootuptime | ft -HideTableHeaders'
-      register: uptime_after
-
-    - name: Send telegram uptime info after reboot
-      telegram:
-        token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-        chat_id: '6343788'
-        msg: | 
-           ========== WINDOWS UPTIME INFO ==========
-           Server >>>>>>>>>>> {{ inventory_hostname }}
-           Boot time before reboot >>>> {{ uptime_before.stdout_lines[1] }}
-           Boot time after reboot >>>> {{ uptime_after.stdout_lines[1] }}
-      ignore_errors: yes
-      delegate_to: localhost
-      when:
-          - confirm_reboot|bool == true
+    - name: Demo
+      win_domain_computer:
+        name: "{{ inventory_hostname }}.{{ dc_domain }}"
+#        dns_hostname: one_linux_server.my_org.local
+        ou: "{{ domain_ou }}"
+        description: Demo AWX
+        enabled: yes
+        state: present
+      delegate_to: "{{ dc }}"
