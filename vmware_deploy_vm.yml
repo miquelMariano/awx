@@ -71,7 +71,7 @@
 #domain_admin_pass=pass
 
 
-- hosts: all
+- hosts: vms
   gather_facts: false
   serial: 1
   tasks:
