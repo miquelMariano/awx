@@ -18,7 +18,7 @@
 #   v4 20/08/2019  Separate "Resize disk" on another play. Bug reported in Ansible 2.8.1. https://github.com/ansible/ansible/issues/55551
 #  
 #EXAMPLE INVENTORY ANSIBLE ENGINE
-#[all:children]
+#[vms:children]
 #grupo-test
 #grupo-prueba
 #
@@ -60,7 +60,7 @@
 #vm_cpu=1
 #vm_disksize=20
 
-#[all:vars]
+#[vms:vars]
 #vc_hostname=192.168.6.10
 #vc_username=administrator@vsphere.local
 #vc_password=pass
