@@ -21,8 +21,8 @@
   tasks:
     - name: Demo
       win_domain_computer:
-        name: "{{ inventory_hostname }}.{{ dc_domain }}"
-        dns_hostname: "{{ inventory_hostname }}.{{ dc_domain }}"
+        name: "{{ inventory_hostname }}"
+        dns_hostname: "{{ inventory_hostname }}"
         ou: "{{ domain_ou }}"
         description: Demo AWX
         enabled: yes
