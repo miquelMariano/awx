@@ -24,7 +24,7 @@
         name: "{{ inventory_hostname }}"
         dns_hostname: "{{ inventory_hostname }}"
         ou: "{{ domain_ou }}"
-        description: Demo AWX
+        description: Demo AWX Ncora QA
         enabled: yes
         state: present
       delegate_to: "{{ dc }}"
