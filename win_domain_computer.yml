@@ -22,6 +22,7 @@
     - name: Demo
       win_domain_computer:
         name: "{{ inventory_hostname }}"
+        sam_account_name: "{{ inventory_hostname }}"
         dns_hostname: "{{ inventory_hostname }}"
         ou: "{{ domain_ou }}"
         description: Demo AWX Ncora QA
