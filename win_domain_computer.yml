@@ -28,8 +28,4 @@
         description: Demo AWX Ncora QA
         enabled: yes
         state: present
-      register: task_result
-      until: task_result.rc == 0
-      retries: 3
-      delay: 10
       delegate_to: "{{ dc }}"
