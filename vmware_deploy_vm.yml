@@ -117,7 +117,11 @@
   - name: Wait RDP port
     win_wait_for:
        port: 3389
-       delay: 30  
+       delay: 30
+    register: task_result
+    until: task_result.rc == 0
+    retries: 5
+    delay: 30     
 
 #  - name: Resize disk
 #    vmware_guest:
