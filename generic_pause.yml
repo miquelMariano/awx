@@ -4,9 +4,9 @@
   gather_facts: false
   serial: 1
   tasks:
-    - name: Sleep for 5 minutes and continue with play
+    - name: Sleep for 2 minutes and continue with play
       wait_for:
-        timeout: 300
+        timeout: 120
       delegate_to: localhost 
       
 
