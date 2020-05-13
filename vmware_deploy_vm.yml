@@ -114,7 +114,7 @@
         domainadminpassword: "{{ domain_admin_pass }}"
     delegate_to: localhost
 
-  - name: Sleep for 300 seconds and continue with play
+  - name: Sleep for 3 minutes and continue with play
     wait_for:
       timeout: 180
     delegate_to: localhost   
