@@ -86,7 +86,7 @@
       cluster: "{{ vc_cluster }}"
       name: "{{ inventory_hostname }}"
       annotation: "{{ vc_note }}"
-#      state: poweredon
+      state: poweredon
       disk:
       - size_gb: "{{ vm_disksize}}"
         type: thin
