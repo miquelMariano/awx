@@ -29,6 +29,8 @@
 #   
 
 - hosts: "{{ servers }}"
+  gather_facts: false
+  serial: 1
   tasks:
     - name: Install multiple packages
       win_chocolatey:
