@@ -117,7 +117,7 @@
   - name: Wait RDP port
     win_wait_for:
        port: 3389
-       delay: 10  
+       delay: 30  
 
 #  - name: Resize disk
 #    vmware_guest:
