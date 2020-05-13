@@ -114,31 +114,31 @@
         domainadminpassword: "{{ domain_admin_pass }}"
     delegate_to: localhost
 
-  - name: Resize disk
-    vmware_guest:
-      hostname: "{{ vc_hostname }}" 
-      username: "{{ vc_username }}" 
-      password: "{{ vc_password }}" 
-      validate_certs: no  
-      state: present
-      name: "{{ inventory_hostname }}"
-      disk:
-      - size_gb: "{{ vm_disksize}}"
-        type: thin
-        datastore: "{{ vm_datastore }}"
-    delegate_to: localhost
+#  - name: Resize disk
+#    vmware_guest:
+#      hostname: "{{ vc_hostname }}" 
+#      username: "{{ vc_username }}" 
+#      password: "{{ vc_password }}" 
+#      validate_certs: no  
+#      state: present
+#      name: "{{ inventory_hostname }}"
+#      disk:
+#      - size_gb: "{{ vm_disksize}}"
+#        type: thin
+#        datastore: "{{ vm_datastore }}"
+#    delegate_to: localhost
     
-  - name: Power on VM
-    vmware_guest:
-      hostname: "{{ vc_hostname }}"
-      username: "{{ vc_username }}"
-      password: "{{ vc_password }}"
-      validate_certs: no
-      state: poweredon
-      name: "{{ inventory_hostname }}"
-      wait_for_ip_address: yes
-    delegate_to: localhost      
-    register: task_output
+#  - name: Power on VM
+#    vmware_guest:
+#      hostname: "{{ vc_hostname }}"
+#      username: "{{ vc_username }}"
+#      password: "{{ vc_password }}"
+#      validate_certs: no
+#      state: poweredon
+#      name: "{{ inventory_hostname }}"
+#      wait_for_ip_address: yes
+#    delegate_to: localhost      
+#    register: task_output
 
   - name: Register variables to use into Tower workflow
     set_stats:
