@@ -86,7 +86,7 @@
       cluster: "{{ vc_cluster }}"
       name: "{{ inventory_hostname }}"
       annotation: "{{ vc_note }}"
-      state: poweredon
+ #     state: poweredon
       disk:
       - size_gb: "{{ vm_disksize}}"
         type: thin
@@ -114,9 +114,9 @@
         domainadminpassword: "{{ domain_admin_pass }}"
     delegate_to: localhost
 
-  - name: Sleep for 3 minutes and continue with play
+  - name: Sleep for 4 minutes and continue with play
     wait_for:
-      timeout: 180
+      timeout: 240
     delegate_to: localhost   
 
 #  - name: Resize disk
@@ -133,17 +133,17 @@
 #        datastore: "{{ vm_datastore }}"
 #    delegate_to: localhost
     
-#  - name: Power on VM
-#    vmware_guest:
-#      hostname: "{{ vc_hostname }}"
-#      username: "{{ vc_username }}"
-#      password: "{{ vc_password }}"
-#      validate_certs: no
-#      state: poweredon
-#      name: "{{ inventory_hostname }}"
-#      wait_for_ip_address: yes
-#    delegate_to: localhost      
-#    register: task_output
+  - name: Power on VM
+    vmware_guest:
+      hostname: "{{ vc_hostname }}"
+      username: "{{ vc_username }}"
+      password: "{{ vc_password }}"
+      validate_certs: no
+      state: poweredon
+      name: "{{ inventory_hostname }}"
+      wait_for_ip_address: yes
+    delegate_to: localhost      
+    register: task_output
 
   - name: Register variables to use into Tower workflow
     set_stats:
