@@ -44,6 +44,7 @@
            - python-pip
            - yum-utils
            - ansible
+           - python3
 
     - name: Add docker-ce repository
       shell: "yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo"      
