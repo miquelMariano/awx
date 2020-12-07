@@ -87,7 +87,7 @@
          from: Ansible <miquel.mariano@ncora.com>
          to: miquel.mariano@ncora.com
 #        cc: CC_EMAIL@gmail.com
-         subject: "AWX/Tower backup {{ timestamp.stdout }}"
+         subject: "AWX/Tower backup {{ timestamp.stdout }} {{ item }}" 
          body: "See attachments"
          attach:
            - "{{ backup_folder }}/{{ timestamp.stdout }}_{{ item }}.json"
