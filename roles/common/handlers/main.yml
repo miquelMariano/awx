@@ -1,2 +1,7 @@
 ---
 # handlers file for roles/common_v2
+
+- name: RebootVM
+  reboot:
+    reboot_timeout: 180
+
