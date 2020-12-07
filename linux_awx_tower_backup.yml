@@ -62,7 +62,7 @@
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
          chat_id: '6343788'
-         msg: AWX/tower backup FAILED
+         msg: "AWX/tower backup {{ item }} FAILED"
       ignore_errors: yes
       delegate_to: localhost
       when:
@@ -72,7 +72,7 @@
       telegram:
          token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
          chat_id: '6343788'
-         msg: AWX/tower backup OK
+         msg: "AWX/tower backup {{ item }} OK"
       ignore_errors: yes
       delegate_to: localhost
       when:
