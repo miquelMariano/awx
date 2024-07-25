@@ -23,11 +23,14 @@
   vars:
     telegram_msg: "Hello world from Ansible"
   tasks:
-    - name: Send telegram message
-      telegram:
-        token: 304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8
-        chat_id: '6343788'
-        msg: "{{ telegram_msg }}"
-      delegate_to: localhost
-      ignore_errors: yes  
+
+    - name: Send notify to Telegram
+      community.general.telegram:
+       token: '304017237:AAHpKXZBaw_wOF3H-ryhWl3F3wqIVP_Zqf8'
+       api_args:
+         chat_id: 6343788
+         parse_mode: "markdown"
+         text: "Your precious application has been deployed: https://example.com"
+         disable_web_page_preview: true
+         disable_notification: true
 
