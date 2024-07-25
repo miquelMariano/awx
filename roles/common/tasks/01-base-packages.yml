@@ -4,6 +4,7 @@
   yum:
     name: epel-release
     state: latest
+  ignore_errors: yes  
 
 
 - name: Ensure common software are installed
