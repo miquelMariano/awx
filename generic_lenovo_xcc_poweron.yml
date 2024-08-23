@@ -1,0 +1,38 @@
+---
+
+#DESCRIPCIÓN
+#   Este playbook arranca un servidor Lenovo via XCC
+
+#NOTAS 
+#   Nombre del fichero  : generic_lenovo_xcc_poweron.yml
+#   Autor     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Versión    : 1
+
+#USO
+#   
+#   
+
+#DOCUMENTACIÓN
+#hhttps://docs.ansible.com/ansible/latest/collections/community/general/xcc_redfish_command_module.html
+
+#CHANGELOG
+#   v1 23/08/2024  	Creación del playbook
+#   v2 
+
+
+- hosts: all
+  gather_facts: false
+  serial: 1
+  tasks:
+  - name: Get ComputeSystem Oem property SystemStatus via GetResource command
+    community.general.xcc_redfish_command:
+      category: Raw
+      command: GetResource
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      resource_uri: "/redfish/v1/Systems/1"
+    register: result
+  - ansible.builtin.debug:
+      msg: "{{ result.redfish_facts.data.Oem.Lenovo.SystemStatus }}"
+
