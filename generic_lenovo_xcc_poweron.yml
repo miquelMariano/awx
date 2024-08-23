@@ -29,6 +29,7 @@
       url: https://{{ baseuri}}/redfish/v1/Systems/1/Actions/ComputerSystem.Reset
       user: "{{ username }}" 
       password: "{{ password }}"
+      method: POST
       body: ForceOff
       force_basic_auth: true
 #      status_code: 201
