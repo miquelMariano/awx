@@ -20,14 +20,14 @@
   gather_facts: false
   serial: 1
   tasks:
-  - name: Place a ESXi into Maintenance Mode
+  - name: Modo Mantenimiento en host ESXi
     community.vmware.vmware_maintenancemode:
        hostname: "{{ vc_hostname }}" 
        username: "{{ vc_username }}" 
        password: "{{ vc_password }}" 
        validate_certs: no
        esxi_hostname: "{{ esxi_hostname }}"
-       vsan: noAction
+#       vsan: noAction
        evacuate: true
        timeout: 3600
        state: "{{ maintenance_mode_status }}" # present o absent
