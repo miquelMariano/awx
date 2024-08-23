@@ -1,19 +1,19 @@
 ---
 
-#DESCRIPTION
-#   This playbook place a ESXi into Maintenance Mode
+#DESCRIPCIÓN
+#   Este playbook gestiona el modo mantenimiento en un host ESXi
 
-#NOTES 
-#   File Name  : telegram.yml
-#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
-#   Version    : 1
+#NOTAS 
+#   Nombre del fichero  : vmware_esxi_maintenance_mode.yml
+#   Autor     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Versión    : 2
 
-#USAGE
+#USO
 #   
 #   
 #CHANGELOG
-#   v1 13/11/2019  	Playbook creation
-#   v2 
+#   v1 13/11/2019  	Creación del playbook
+#   v2 23/08/2024   Actualización parámetros
 
 
 - hosts: all
@@ -21,15 +21,15 @@
   serial: 1
   tasks:
   - name: Place a ESXi into Maintenance Mode
-    vmware_maintenancemode:
+    community.vmware.vmware_maintenancemode:
        hostname: "{{ vc_hostname }}" 
        username: "{{ vc_username }}" 
        password: "{{ vc_password }}" 
        validate_certs: no
        esxi_hostname: "{{ esxi_hostname }}"
-#       vsan: ensureObjectAccessibility
-       evacuate: yes
+       vsan: noAction
+       evacuate: true
        timeout: 3600
-       state: present
+       state: "{{ maintenance_mode_status }}" # present o absent
     delegate_to: localhost
 
