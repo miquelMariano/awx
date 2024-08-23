@@ -35,3 +35,7 @@
       resource_uri: "/redfish/v1/Systems/1/Actions/ComputerSystem.Reset"
       request_body:
          ResetType: ForceOn
+    register: result
+  - name: Mostrar resultado
+    ansible.builtin.debug:
+      msg: "{{ result.redfish_facts.data }}"       
