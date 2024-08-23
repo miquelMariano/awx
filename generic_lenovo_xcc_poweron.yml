@@ -30,8 +30,12 @@
       user: "{{ username }}" 
       password: "{{ password }}"
       method: POST
-      body: '{ "ResetType" : "On" }'
+      body_format: json
+      body:
+        ResetType: ForceOff
       force_basic_auth: true
+    delegate_to: localhost
+      
 #      status_code: 201
 #      body_format: json
 
