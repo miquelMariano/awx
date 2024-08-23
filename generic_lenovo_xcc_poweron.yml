@@ -34,4 +34,4 @@
       password: "{{ password }}"
       resource_uri: "/redfish/v1/Systems/1/Actions/ComputerSystem.Reset"
       request_body:
-         ResetType: On
+         ResetType: ForceOn
