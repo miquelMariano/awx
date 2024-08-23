@@ -35,4 +35,3 @@
     register: result
   - ansible.builtin.debug:
       msg: "{{ result.redfish_facts.data.Oem.Lenovo.SystemStatus }}"
-
