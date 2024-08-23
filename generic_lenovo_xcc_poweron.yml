@@ -24,15 +24,25 @@
   gather_facts: false
   serial: 1
   tasks:
-  - name: Get ComputeSystem Oem property SystemStatus via GetResource command
-    community.general.xcc_redfish_command:
-      category: Raw
-      command: GetResource
-      baseuri: "{{ baseuri }}"
-      username: "{{ username }}"
+  - name: Arrancar servidor
+    ansible.builtin.uri:
+      url: https://{{ baseuri}}/redfish/v1/Systems/1/Actions/ComputerSystem.Reset
+      user: "{{ username }}" 
       password: "{{ password }}"
-      resource_uri: "/redfish/v1/Systems/1"
-    register: result
-  - ansible.builtin.debug:
-      msg: "{{ result.redfish_facts.data.Oem.Lenovo.SystemStatus }}"
+      body: ForceOff
+      force_basic_auth: true
+#      status_code: 201
+#      body_format: json
+
+#  - name: Get ComputeSystem Oem property SystemStatus via GetResource command
+#    community.general.xcc_redfish_command:
+#      category: Raw
+#      command: GetResource
+#      baseuri: "{{ baseuri }}"
+#      username: "{{ username }}"
+#      password: "{{ password }}"
+#      resource_uri: "/redfish/v1/Systems/1"
+#    register: result
+#  - ansible.builtin.debug:
+#      msg: "{{ result.redfish_facts.data.Oem.Lenovo.SystemStatus }}"
 
