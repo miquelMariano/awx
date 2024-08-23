@@ -24,30 +24,15 @@
   gather_facts: false
   serial: 1
   tasks:
-  - name: Arrancar servidor
-    ansible.builtin.uri:
-      url: https://192.168.222.17/redfish/v1/Systems/1/Actions/ComputerSystem.Reset
-      user: "{{ username }}" 
+  - name: Get ComputeSystem Oem property SystemStatus via GetResource command
+    community.general.xcc_redfish_command:
+      category: Raw
+      command: GetResource
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
       password: "{{ password }}"
-      method: POST
-      body_format: json
-      body:
-        ResetType: ForceOff
-      force_basic_auth: true
-    delegate_to: localhost
-      
-#      status_code: 201
-#      body_format: json
-
-#  - name: Get ComputeSystem Oem property SystemStatus via GetResource command
-#    community.general.xcc_redfish_command:
-#      category: Raw
-#      command: GetResource
-#      baseuri: "{{ baseuri }}"
-#      username: "{{ username }}"
-#      password: "{{ password }}"
-#      resource_uri: "/redfish/v1/Systems/1"
-#    register: result
-#  - ansible.builtin.debug:
-#      msg: "{{ result.redfish_facts.data.Oem.Lenovo.SystemStatus }}"
+      resource_uri: "/redfish/v1/Systems/1"
+    register: result
+  - ansible.builtin.debug:
+      msg: "{{ result.redfish_facts.data.Oem.Lenovo.SystemStatus }}"
 
