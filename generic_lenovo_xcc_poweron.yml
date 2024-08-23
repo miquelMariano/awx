@@ -25,7 +25,7 @@
   gather_facts: false
   serial: 1
   tasks:
-  - name: Apagar servidor Lenovo
+  - name: Arranca servidor Lenovo
     community.general.xcc_redfish_command:
       category: Raw
       command: PostResource
@@ -34,4 +34,4 @@
       password: "{{ password }}"
       resource_uri: "/redfish/v1/Systems/1/Actions/ComputerSystem.Reset"
       request_body:
-         ResetType: ForceOff
+         ResetType: On
