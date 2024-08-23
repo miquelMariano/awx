@@ -24,14 +24,16 @@
   gather_facts: false
   serial: 1
   tasks:
-  - name: Get ComputeSystem Oem property SystemStatus via GetResource command
+  - name: Apagar servidor Lenovo
     community.general.xcc_redfish_command:
       category: Raw
-      command: GetResource
+      command: PostResource
       baseuri: "{{ baseuri }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      resource_uri: "/redfish/v1/Systems/1"
+      resource_uri: "/redfish/v1/Systems/1/Actions/ComputerSystem.Reset"
+      request_body:
+         ResetType: ForceOff
     register: result
   - ansible.builtin.debug:
-      msg: "{{ result.redfish_facts.data.Oem.Lenovo.SystemStatus }}"
+      msg: "{{ result.redfish_facts.data }}"
