@@ -21,8 +21,6 @@
 
 
 - hosts: all
-  collections:
-    - community.general
   gather_facts: false
   serial: 1
   tasks:
