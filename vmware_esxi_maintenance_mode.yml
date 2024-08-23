@@ -11,6 +11,10 @@
 #USO
 #   
 #   
+
+#DOCUMENTACIÓN
+#https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_maintenancemode_module.html
+
 #CHANGELOG
 #   v1 13/11/2019  	Creación del playbook
 #   v2 23/08/2024   Actualización parámetros
