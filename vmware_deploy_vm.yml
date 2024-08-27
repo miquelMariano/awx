@@ -103,7 +103,7 @@
         gateway: "{{ vm_networkgw }}"
       customization:
         hostname: "{{ inventory_hostname }}"
-        autologon: true
+        autologon: false
         dns_servers:
         - "{{ vm_networkdns1 }}"
         - "{{ vm_networkdns2 }}"
