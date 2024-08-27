@@ -76,7 +76,7 @@
   serial: 5
   tasks:
   - name: Deploy VM windows from template and customize
-    vmware_guest:
+    community.vmware.vmware_guest:
       hostname: "{{ vc_hostname }}" 
       username: "{{ vc_username }}" 
       password: "{{ vc_password }}" 
@@ -115,7 +115,7 @@
     delegate_to: localhost 
 
   - name: Power on VM
-    vmware_guest:
+    vmware.vmware.vmware_guest:
       hostname: "{{ vc_hostname }}"
       username: "{{ vc_username }}"
       password: "{{ vc_password }}"
