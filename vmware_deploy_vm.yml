@@ -115,7 +115,7 @@
     delegate_to: localhost 
 
   - name: Power on VM
-    vmware.vmware.vmware_guest:
+    comunity.vmware.vmware_guest:
       hostname: "{{ vc_hostname }}"
       username: "{{ vc_username }}"
       password: "{{ vc_password }}"
