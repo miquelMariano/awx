@@ -28,6 +28,7 @@
        username: "{{ vc_username }}" 
        password: "{{ vc_password }}" 
        folder: "{{ vm_folder }}"
+       name: "{{ inventory_hostname }}"
        state: "{{ vm_powerstate }}"
        validate_certs: no
     delegate_to: localhost
