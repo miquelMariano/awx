@@ -1,0 +1,35 @@
+---
+
+#DESCRIPCIÓN
+#   Este playbook puede mover VMs con vMotion
+
+#NOTAS 
+#   Nombre del fichero  : vmware_vm_vmotion.yml
+#   Autor     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Versión    : 1
+
+#USO
+#   
+#   
+
+#DOCUMENTACIÓN
+#https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_vmotion_module.html
+
+#CHANGELOG
+#   v1 28/08/2024 	Creación del playbook
+
+- hosts: all
+  gather_facts: false
+  serial: 1
+  tasks:
+  - name: vMotion
+    community.vmware.vmware_vmotion:
+       hostname: "{{ vc_hostname }}" 
+       username: "{{ vc_username }}" 
+       password: "{{ vc_password }}" 
+       name: "{{ inventory_hostname }}"
+       destination_host: "{{ destination_host }}"
+       destination_datastore: "{{ destination_datastore }}"
+       validate_certs: no
+    delegate_to: localhost
+
