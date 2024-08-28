@@ -31,5 +31,4 @@
        destination_host: "{{ destination_host }}"
        destination_datastore: "{{ destination_datastore }}"
        validate_certs: no
-    delegate_to: localhost
-
+    delegate_to: localhos

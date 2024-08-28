@@ -32,4 +32,4 @@
        state: "{{ vm_powerstate }}"
        validate_certs: no
     delegate_to: localhost
-    when: "{{ inventory_hostname }}" =! "lab-vcenter-01" or "{{ inventory_hostname }}" =! "lab-dc-01" or "{{ inventory_hostname }}" =! "mmr-awx-01"
+    when: "{{ inventory_hostname }}" != "lab-vcenter-01" or "{{ inventory_hostname }}" != "lab-dc-01" or "{{ inventory_hostname }}" != "mmr-awx-01"
