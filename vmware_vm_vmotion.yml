@@ -27,7 +27,7 @@
        hostname: "{{ vc_hostname }}" 
        username: "{{ vc_username }}" 
        password: "{{ vc_password }}" 
-       name: "{{ inventory_hostname }}"
+       vm_name: "{{ inventory_hostname }}"
        destination_host: "{{ destination_host }}"
        destination_datastore: "{{ destination_datastore }}"
        validate_certs: no
