@@ -39,5 +39,5 @@
 
   - name: Sacar vSAN de modo mantenimiento
     ansible.builtin.command: localcli vsan maintenancemode cancel
-    when: maintenance_mode_status == absent
+    when: maintenance_mode_status == "absent"
 
