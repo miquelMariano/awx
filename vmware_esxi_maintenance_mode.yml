@@ -31,7 +31,7 @@
        password: "{{ vc_password }}" 
        validate_certs: no
        esxi_hostname: "{{ esxi_hostname }}"
-#       vsan: noAction
+       vsan: noAction
        evacuate: true
        timeout: 3600
        state: "{{ maintenance_mode_status }}" # present o absent
