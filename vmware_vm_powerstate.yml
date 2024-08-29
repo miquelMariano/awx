@@ -22,7 +22,7 @@
   gather_facts: false
   serial: 1
   tasks:
-  - name: Apagar VM
+  - name: Apagar o encender VMs
     community.vmware.vmware_guest_powerstate:
        hostname: "{{ vc_hostname }}" 
        username: "{{ vc_username }}" 
