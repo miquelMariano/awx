@@ -1,0 +1,35 @@
+---
+
+#DESCRIPCIÓN
+#   Este playbook espera a que un ESXi esté disponible
+
+#NOTAS 
+#   Nombre del fichero  : vmware_esxi_pause_until_reachable.yml
+#   Autor     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Versión    : 2
+
+#USO
+#   
+#   
+
+#DOCUMENTACIÓN
+#https://docs.ansible.com/ansible/latest/collections/ansible/builtin/uri_module.html
+
+#CHANGELOG
+#   v1 29/08/2024 	Creación del playbook
+
+- hosts: all
+  gather_facts: false
+  serial: 1
+  tasks:
+  - name: Espera a que el ESXi host client esté disponible
+    ansible.builtin.uri:
+      url: "{{ esxi_host_client_url }}"
+      follow_redirects: none
+      method: GET
+    register: _result
+    until: _result.status == 200
+    retries: 24 # Retries for 24 * 10 seconds = 240 seconds = 2 minutes
+    delay: 10 # Every 10 seconds
+  delegate_to: localhost
+
