@@ -31,5 +31,4 @@
     until: _result.status == 200
     retries: 24 # Retries for 24 * 10 seconds = 240 seconds = 2 minutes
     delay: 10 # Every 10 seconds
-  delegate_to: localhost
 
