@@ -1,0 +1,32 @@
+---
+
+#DESCRIPCIÓN
+#   Este playbook genera una pausa. Se utiliza en un workflow de AWS cuando necesitamos "esperar"
+
+#NOTAS 
+#   Nombre del fichero  : vmware_esxi_maintenance_mode.yml
+#   Autor     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Versión    : 1
+
+#USO
+#   
+#   
+
+#DOCUMENTACIÓN
+#https://docs.ansible.com/ansible/latest/collections/ansible/builtin/pause_module.html
+
+#CHANGELOG
+#   v1 29/08/2024  	Creación del playbook
+# 
+
+
+- hosts: all
+  gather_facts: false
+  serial: 1
+  tasks:
+  - name: Pausa
+    ansible.builtin.pause:
+      prompt: "Pulsa una tecla para continuar..."
+      echo: no
+    delegate_to: localhost
+
