@@ -27,6 +27,7 @@
       url: "{{ esxi_host_client_url }}"
       follow_redirects: none
       method: GET
+      validate_certs: no
     register: _result
     until: _result.status == 200
     retries: 24 # Retries for 24 * 10 seconds = 240 seconds = 2 minutes
