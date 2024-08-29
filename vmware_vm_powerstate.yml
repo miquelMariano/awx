@@ -32,4 +32,5 @@
        state: "{{ vm_powerstate }}"
        validate_certs: no
     when: inventory_hostname != "lab-vcenter-01" or inventory_hostname and "lab-dc-01" or inventory_hostname != "mmr-awx-01"
+    ignore_errors: true
     delegate_to: localhost
