@@ -37,3 +37,7 @@
        state: "{{ maintenance_mode_status }}" # present o absent
     delegate_to: localhost
 
+  - name: Sacar vSAN de modo mantenimiento
+    ansible.builtin.command: localcli vsan maintenancemode cancel
+    when: maintenance_mode_status == absent
+
