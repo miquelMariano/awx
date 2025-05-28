@@ -69,6 +69,7 @@
 #localadminpass=pass
 #domain_admin=miquel.mariano
 #domain_admin_pass=pass
+#domain_ou=OU=SERVIDORES,OU=PRUEBAS,OU=UNIVERSITY,DC=university,DC=encora
 
 
 - hosts: all
@@ -111,6 +112,7 @@
         dns_suffix: "{{ dc_domain }}" 
         password: "{{ localadminpass }}" 
         joindomain: "{{ dc_domain }}"
+        domain_ou: "{{ domain_ou }}"
         domainadmin: "{{ domain_admin }}"
         domainadminpassword: "{{ domain_admin_pass }}"
     delegate_to: localhost 
