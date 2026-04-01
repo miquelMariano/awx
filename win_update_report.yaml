@@ -1,0 +1,160 @@
+---
+#DESCRIPCIÓN
+#   Este playbook analiza el estado de las actualizaciones de windows y genera un reporte visual en HTML
+#   Estructura esperada:
+#   /etc/ansible/
+#   ├── playbooks/
+#   │   └── win_update_report.yml
+#   ├── templates/
+#   │   └── patch_report.html.j2
+#   └── reports/                  ← se crea automáticamente
+
+#NOTAS 
+#   File Name  : win_update_report.yaml
+#   Author     : Miquel Mariano - @miquelMariano | https://miquelmariano.github.io
+#   Version    : 1
+
+#USO
+#   ansible-playbook playbooks/win_update_report.yaml -i inventory/servers -e "servers=windows override_domain=UNIVERSITY.ENCORA"
+#   
+#VERSIONADO
+#   v1 18/03/2026  	Creación del playbook
+
+- name: PLAY 1 — Recoger estado de updates en todos los hosts Windows
+  hosts: '{{ servers }}'
+  gather_facts: false
+  ignore_unreachable: true
+  ignore_errors: true
+  serial: 5          # procesar de 5 en 5 para no saturar la red
+
+  tasks:
+
+    - name: Buscar updates disponibles y pendientes
+      ansible.windows.win_updates:
+        state: searched
+        category_names:
+           - SecurityUpdates
+           - CriticalUpdates
+           - UpdateRollups
+           - Updates
+           - Drivers                        # ← Broadcom y otros drivers
+           - DefinitionUpdates              # ← Windows Defender definitions
+           - Tools                          # ← MSRT y herramientas Microsoft
+           - FeaturePacks
+           - ServicePacks
+        #          - SecurityUpdates
+        #  - CriticalUpdates
+        #  - UpdateRollups
+        #  - Updates
+      register: upd_search
+      ignore_errors: true
+
+    - name: Guardar resultado como fact del host
+      set_fact:
+        patch_info:
+          hostname:        "{{ inventory_hostname | regex_replace('\\..*$', '') }}"
+          fqdn:            "{{ inventory_hostname }}"
+          ip:              "{{ ansible_host | default(inventory_hostname) }}"
+          os:              "{{ ansible_os_name | default('Windows') }}"
+          # Lógica de estado corregida:
+          #   failed      → win_updates falló
+          #   reboot      → hay updates instalados que necesitan reinicio
+          #   pending     → hay updates SIN instalar (found_update_count > 0)
+          #   ok          → todo al día, 0 pendientes
+          status: >-
+            {%- if upd_search.unreachable | default(false) -%}unreachable{%- elif upd_search is failed -%}failed{%- elif upd_search.reboot_required | default(false) -%}reboot{%- elif upd_search.found_update_count | default(0) | int > 0 -%}pending{%- else -%}ok{%- endif -%}
+          installed_count: "{{ upd_search.installed_update_count | default(0) }}"
+          pending_count:   "{{ upd_search.found_update_count    | default(0) }}"
+          updates: >-
+            {{
+              upd_search.updates.values() | list
+              if (upd_search.updates is defined and upd_search.updates)
+              else []
+            }}
+          error_msg: "{% if upd_search.unreachable | default(false) %}WinRM unreachable — {{ upd_search.msg | default('Connection refused') }}{% elif upd_search is failed %}{{ upd_search.msg | default('') }}{% else %}{% endif %}"
+      when: upd_search is not skipped
+
+    - name: Registrar host sin conexión
+      set_fact:
+        patch_info:
+          hostname:        "{{ inventory_hostname | regex_replace('\\..*$', '') }}"
+          fqdn:            "{{ inventory_hostname }}"
+          ip:              "{{ ansible_host | default(inventory_hostname) }}"
+          os:              "Windows"
+          status:          "unreachable"
+          installed_count: 0
+          pending_count:   0
+          updates:         []
+          error_msg:       "WinRM timeout — equipo apagado o fuera de red"
+      when: upd_search is skipped
+
+- name: PLAY 2 — Renderizar el report HTML en localhost
+  hosts: localhost
+  gather_facts: true
+
+  vars:
+    template_src: "/etc/ansible/templates/patch_report.html.j2"
+    report_dir:   "/etc/ansible/reports"
+    _dt:          "{{ ansible_facts['date_time'] }}"
+    report_file: "{{ report_dir }}/patch_{{ _dt.date }}_{{ _dt.hour }}{{ _dt.minute }}.html"
+    patch_results: >-
+      {{
+        groups['windows']
+        | map('extract', hostvars, 'patch_info')
+        | select('defined')
+        | list
+      }}
+
+  tasks:
+
+    - name: Crear directorio de reports si no existe
+      file:
+        path: "{{ report_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Verificar que el template existe
+      stat:
+        path: "{{ template_src }}"
+      register: template_stat
+
+    - name: Abortar si falta el template
+      fail:
+        msg: "Template no encontrado en: {{ template_src }}"
+      when: not template_stat.stat.exists
+
+    - name: Preparar variables del template
+      set_fact:
+        rpt_domain:      "{{ override_domain | default('CORP.LOCAL') }}"
+        rpt_date:        "{{ _dt.date }} {{ _dt.time }} UTC"
+        rpt_run_id:      "ansible-{{ _dt.date | replace('-','') }}-{{ _dt.hour }}{{ _dt.minute }}{{ _dt.second }}"
+        rpt_duration:    "{{ override_duration | default('N/A') }}"
+        rpt_user:        "{{ lookup('env','USER') | default('ansible') }}"
+        rpt_ansible_ver: "{{ ansible_version.full }}"
+
+    - name: Renderizar template HTML
+      template:
+        src:  "{{ template_src }}"
+        dest: "{{ report_file }}"
+        mode: '0644'
+
+    - name: Actualizar enlace latest.html
+      file:
+        src:   "{{ report_file }}"
+        dest:  "{{ report_dir }}/latest.html"
+        state: link
+        force: true    
+
+    - name: Report generado correctamente
+      debug:
+        msg:
+          - "────────────────────────────────────────────────────"
+          - "  Report : {{ report_file }}"
+          - "  Hosts procesados : {{ patch_results | length }}"
+          - "  OK               : {{ patch_results | selectattr('status','eq','ok')          | list | length }}"
+          - "  Pendientes       : {{ patch_results | selectattr('status','eq','pending')      | list | length }}"
+          - "  Reboot pendiente : {{ patch_results | selectattr('status','eq','reboot')      | list | length }}"
+          - "  Fallidos         : {{ patch_results | selectattr('status','eq','failed')      | list | length }}"
+          - "  Sin conexion     : {{ patch_results | selectattr('status','eq','unreachable') | list | length }}"
+          - "────────────────────────────────────────────────────"
+
